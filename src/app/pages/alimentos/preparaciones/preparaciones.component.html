@@ -1,0 +1,38 @@
+<nb-card>
+  <nb-card-header>
+    Gestionar Preparación
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="preparaciones" *ngFor="let preparacion of preparaciones" (click)="onSelect(preparacion)">
+      <nb-user  [name]="preparacion.Nombre"   size="large"></nb-user>
+      <button class="delete"
+      (click)="delete(preparacion); $event.stopPropagation()">Eliminar</button>
+
+    </div>
+    </nb-card-body>
+    <nb-card-footer>
+      <div class="input-group">
+        <input #NombrePreparacion />
+        <button (click)="add(NombrePreparacion.value); NombrePreparacion.value=''">
+          Añadir
+        </button>
+      </div>
+    </nb-card-footer>
+</nb-card>
+<nb-card>
+  <nb-card-header>
+    {{selectedPreparacion.Nombre}}
+  </nb-card-header>
+
+  <nb-card-body>
+  </nb-card-body>
+    <nb-card-footer>
+      <div class="input-group">
+        <input #NombreProducto />
+        <button (click)="add(NombreProducto.value); NombreProducto.value=''">
+          Añadir
+        </button>
+      </div>
+    </nb-card-footer>
+</nb-card>

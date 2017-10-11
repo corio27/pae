@@ -1,0 +1,36 @@
+<nb-card>
+  <nb-card-header>
+    Gestionar Productos
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="productos" *ngFor="let producto of productos" (click)="onSelect(producto)">
+      <nb-user  [name]="producto.Nombre" [title]="producto.Codigo" size="large"></nb-user>
+      <button class="delete"
+      (click)="delete(producto); $event.stopPropagation()">Eliminar</button>
+
+    </div>
+    </nb-card-body>
+    <nb-card-footer>
+
+    </nb-card-footer>
+</nb-card>
+<nb-card>
+  <nb-card-header>
+    Crear Productos
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="input-group">
+      <input #NombreProducto  placeholder="Nombre" class="form-control"/>
+      <input #CodigoProducto  placeholder="CodigoProducto" class="form-control"/>
+      <button (click)="add(NombreProducto.value, CodigoProducto.value); NombreProducto.value=''; CodigoProducto.value=''">
+        Añadir
+      </button>
+    </div>
+
+    </nb-card-body>
+    <nb-card-footer>
+
+    </nb-card-footer>
+</nb-card>

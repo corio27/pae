@@ -1,0 +1,22 @@
+<nb-card>
+  <nb-card-header>
+    Gestionar Componentes
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="componentes" *ngFor="let componente of componentes" (click)="onSelect(componente)">
+      <nb-user  [name]="componente.Nombre"   size="large"></nb-user>
+      <button class="delete"
+      (click)="delete(componente); $event.stopPropagation()">Eliminar</button>
+
+    </div>
+    </nb-card-body>
+    <nb-card-footer>
+      <div class="input-group">
+        <input #NombreComponente />
+        <button (click)="add(NombreComponente.value); NombreComponente.value=''">
+          Añadir
+        </button>
+      </div>
+    </nb-card-footer>
+</nb-card>

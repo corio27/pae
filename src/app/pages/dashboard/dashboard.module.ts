@@ -44,6 +44,7 @@ import { TrafficChartComponent } from './traffic/traffic-chart.component';
     SolarComponent,
     TrafficComponent,
     TrafficChartComponent,
+
   ],
 })
 export class DashboardModule { }

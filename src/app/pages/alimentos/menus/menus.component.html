@@ -1,0 +1,38 @@
+<nb-card [size]="breakpoint.width >= breakpoints.xxxl || breakpoint.width < breakpoints.md ? 'large' : 'xlarge'">
+  <nb-tabset fullWidth>
+    <nb-tab tabTitle="Estudiantes">
+      <div class="contact" *ngFor="let c of contacts">
+        <nb-user [picture]="c.user.picture" [name]="c.user.name" [title]="c.type" size="large"></nb-user>
+        <i class="i-contact nb-phone"></i>
+      </div>
+    </nb-tab>
+    <nb-tab tabTitle="Docentes">
+      <div class="contact" *ngFor="let c of contacts">
+        <nb-user [picture]="c.user.picture" [name]="c.user.name" [title]="c.type" size="large"></nb-user>
+        <i class="i-contact nb-phone"></i>
+      </div>
+    </nb-tab>
+    <nb-tab tabTitle="Administrativos">
+      <div class="contact" *ngFor="let c of recent">
+        <nb-user [picture]="c.user.picture" [name]="c.user.name" [title]="c.type" size="large"></nb-user>
+        <span class="time">{{ c.time }}</span>
+      </div>
+    </nb-tab>
+    <nb-tab tabTitle="PAE">
+      <div class="contact" *ngFor="let c of recent">
+        <nb-user [picture]="c.user.picture" [name]="c.user.name" [title]="c.type" size="large"></nb-user>
+        <span class="time">{{ c.time }}</span>
+      </div>
+    </nb-tab>
+  </nb-tabset>
+  <nb-card-footer>
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Buscar...">
+      <span class="input-group-btn">
+        <button class="btn btn-danger">
+          Agregar
+        </button>
+      </span>
+    </div>
+  </nb-card-footer>
+</nb-card>
