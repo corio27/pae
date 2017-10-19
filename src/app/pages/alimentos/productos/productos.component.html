@@ -5,7 +5,14 @@
 
   <nb-card-body>
     <div class="productos" *ngFor="let producto of productos" (click)="onSelect(producto)">
-      <nb-user  [name]="producto.Nombre" [title]="producto.Codigo" size="large"></nb-user>
+      <div class="state-container">
+        <div class="state-value border"></div>
+        <div class="state-details">
+          <span class="header">{{producto.Nombre}}</span>
+          <span class="subheader">{{producto.Codigo}}</span>
+          <span class="subheader">{{producto.TipoAlimentoId.Nombre}}</span>
+        </div>
+      </div>
       <button class="delete"
       (click)="delete(producto); $event.stopPropagation()">Eliminar</button>
 
@@ -24,6 +31,9 @@
     <div class="input-group">
       <input #NombreProducto  placeholder="Nombre" class="form-control"/>
       <input #CodigoProducto  placeholder="CodigoProducto" class="form-control"/>
+      <select [(ngModel)]="selectedTipoAlimento">
+        <option *ngFor="let tipoAlimento of tiposAlimentos" [ngValue]="tipoAlimento">{{tipoAlimento.Nombre}}</option>
+      </select>
       <button (click)="add(NombreProducto.value, CodigoProducto.value); NombreProducto.value=''; CodigoProducto.value=''">
         Añadir
       </button>

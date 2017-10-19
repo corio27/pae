@@ -5,10 +5,11 @@
 
   <nb-card-body>
     <div class="preparaciones" *ngFor="let preparacion of preparaciones" (click)="onSelect(preparacion)">
-      <nb-user  [name]="preparacion.Nombre"   size="large"></nb-user>
-      <button class="delete"
-      (click)="delete(preparacion); $event.stopPropagation()">Eliminar</button>
+      <nb-user  [name]="preparacion.Nombre"  [title]="nb-trash" size="large">
 
+      </nb-user>
+      <i class="nb-trash" size="middle"
+      (click)="delete(preparacion); $event.stopPropagation()"></i>
     </div>
     </nb-card-body>
     <nb-card-footer>
@@ -20,19 +21,31 @@
       </div>
     </nb-card-footer>
 </nb-card>
+<div *ngIf="selectedPreparacion">
 <nb-card>
   <nb-card-header>
     {{selectedPreparacion.Nombre}}
   </nb-card-header>
 
   <nb-card-body>
+    <div class="productosPreparacion" *ngFor="let productoPreparacion of productosPreparacion">
+      <nb-user  [name]="productoPreparacion.ProductoId.Nombre"   size="large"></nb-user>
+
+
+    </div>
+
   </nb-card-body>
     <nb-card-footer>
-      <div class="input-group">
-        <input #NombreProducto />
-        <button (click)="add(NombreProducto.value); NombreProducto.value=''">
+
+        <div class="form-group">
+          <label>Producto</label>
+          <select [(ngModel)]="selectedValue">
+            <option *ngFor="let p of productos" [ngValue]="p">{{p.Nombre}}</option>
+          </select>
+        </div>
+        <button (click)="addProducto();">
           Añadir
         </button>
-      </div>
+
     </nb-card-footer>
 </nb-card>

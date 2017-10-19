@@ -1,38 +1,79 @@
-<nb-card [size]="breakpoint.width >= breakpoints.xxxl || breakpoint.width < breakpoints.md ? 'large' : 'xlarge'">
-  <nb-tabset fullWidth>
-    <nb-tab tabTitle="Estudiantes">
-      <div class="contact" *ngFor="let c of contacts">
-        <nb-user [picture]="c.user.picture" [name]="c.user.name" [title]="c.type" size="large"></nb-user>
-        <i class="i-contact nb-phone"></i>
-      </div>
-    </nb-tab>
-    <nb-tab tabTitle="Docentes">
-      <div class="contact" *ngFor="let c of contacts">
-        <nb-user [picture]="c.user.picture" [name]="c.user.name" [title]="c.type" size="large"></nb-user>
-        <i class="i-contact nb-phone"></i>
-      </div>
-    </nb-tab>
-    <nb-tab tabTitle="Administrativos">
-      <div class="contact" *ngFor="let c of recent">
-        <nb-user [picture]="c.user.picture" [name]="c.user.name" [title]="c.type" size="large"></nb-user>
-        <span class="time">{{ c.time }}</span>
-      </div>
-    </nb-tab>
-    <nb-tab tabTitle="PAE">
-      <div class="contact" *ngFor="let c of recent">
-        <nb-user [picture]="c.user.picture" [name]="c.user.name" [title]="c.type" size="large"></nb-user>
-        <span class="time">{{ c.time }}</span>
-      </div>
-    </nb-tab>
-  </nb-tabset>
-  <nb-card-footer>
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Buscar...">
-      <span class="input-group-btn">
-        <button class="btn btn-danger">
-          Agregar
-        </button>
-      </span>
+<nb-card>
+  <nb-card-header>
+    Gestionar Menu
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="menus" *ngFor="let menu of menus" (click)="onSelect(menu)">
+      <nb-user  [name]="menu.Nombre"  [title]="nb-trash" size="large">
+
+      </nb-user>
+      <i class="nb-trash" size="middle"
+      (click)="delete(menu); $event.stopPropagation()"></i>
     </div>
-  </nb-card-footer>
+    </nb-card-body>
+    <nb-card-footer>
+      <div class="input-group">
+        <input #NombreMenu />
+        <button (click)="add(NombreMenu.value); NombreMenu.value=''">
+          Añadir
+        </button>
+      </div>
+    </nb-card-footer>
+</nb-card>
+<div *ngIf="selectedMenu">
+<nb-card>
+  <nb-card-header>
+    Componentes de {{selectedMenu.Nombre}}
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="componentesMenu" *ngFor="let componenteMenu of componentesMenu" (click)="onSelectComponenteMenu(componenteMenu)">
+      <nb-user  [name]="componenteMenu.ComponenteId.Nombre"   size="large"></nb-user>
+
+
+    </div>
+
+  </nb-card-body>
+    <nb-card-footer>
+
+        <div class="form-group">
+          <label>Componente</label>
+          <select [(ngModel)]="selectedComponente">
+            <option *ngFor="let p of componentes" [ngValue]="p">{{p.Nombre}}</option>
+          </select>
+        </div>
+        <button (click)="addComponente();">
+          Añadir
+        </button>
+
+    </nb-card-footer>
+</nb-card>
+<div *ngIf="selectedComponenteMenu">
+<nb-card>
+  <nb-card-header>
+    Preparaciones de {{selectedComponenteMenu.MenuId.Nombre}}-{{selectedComponenteMenu.ComponenteId.Nombre}}
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="componentesPreparacion" *ngFor="let preparacionComponente of preparacionesComponente">
+      <nb-user  [name]="preparacionComponente.PreparacionId.Nombre"   size="large"></nb-user>
+
+
+    </div>
+
+  </nb-card-body>
+    <nb-card-footer>
+
+        <div class="form-group">
+          <label>Preparación</label>
+          <select [(ngModel)]="selectedPreparacion">
+            <option *ngFor="let p of preparaciones" [ngValue]="p">{{p.Nombre}}</option>
+          </select>
+        </div>
+        <button (click)="addPreparacion();">
+          Añadir
+        </button>
+
+    </nb-card-footer>
 </nb-card>

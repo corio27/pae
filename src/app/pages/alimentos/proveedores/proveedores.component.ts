@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbThemeService, NbMediaBreakpoint, NbMediaBreakpointsService } from '@nebular/theme';
-import { Persona } from '../../../@core/data/persona';
-import { PersonaService } from '../../../@core/data/persona.service';
-import { HttpClient } from '@angular/common/http';
-import { UserService } from '../../../@core/data/users.service';
+import { Proveedor } from '../../../@core/data/proveedor';
+import { Producto } from '../../../@core/data/producto';
+import { ProductosProveedor } from '../../../@core/data/productosProveedor';
+import { ProveedorService } from '../../../@core/data/proveedor.service';
+import { ProductoService } from '../../../@core/data/producto.service';
+
+
 @Component({
   selector: 'ngx-proveedores',
   styleUrls: ['./proveedores.component.scss'],
@@ -11,58 +13,56 @@ import { UserService } from '../../../@core/data/users.service';
 })
 export class ProveedoresComponent implements OnInit, OnDestroy {
 
-  personas: Persona[];
-  contacts: any[];
-  recent: any[];
-  breakpoint: NbMediaBreakpoint;
-  breakpoints: any;
-  themeSubscription: any;
-  currentTheme: string;
-
-  constructor(private personaService: PersonaService,
-              private userService: UserService,
-              private themeService: NbThemeService,
-              private breakpointService: NbMediaBreakpointsService, private http: HttpClient) {
-                this.breakpoints = breakpointService.getBreakpointsMap();
-                this.themeSubscription = themeService.onMediaQueryChange()
-                  .subscribe(([oldValue, newValue]) => {
-                    this.breakpoint = newValue;
-                  });
-
-    }
+  proveedores: Proveedor[];
+  productos: Producto[];
+  selectedProveedor: Proveedor;
+  productosProveedor: ProductosProveedor[];
+  selectedValue: Producto;
+  constructor(private proveedorService: ProveedorService, private productoService: ProductoService) { }
 
     ngOnInit() {
-       // this.personaService.getPersonas().then(personas => this.personas = personas);
-    //    this.http.get('v1/persona').subscribe(data => {
-    //      this.personas = data as Persona[];
-    //      console.info('*r4eb', this.personas);
-    //   })
-      this.userService.getUsers()
-      .subscribe((users: any) => {
-        this.contacts = [
-          {user: users.nick, type: 'mobile'},
-          {user: users.eva, type: 'home'},
-          {user: users.jack, type: 'mobile'},
-          {user: users.lee, type: 'mobile'},
-          {user: users.alan, type: 'home'},
-          {user: users.kate, type: 'work'},
-        ];
+        this.proveedorService.getProveedores().then(proveedores => this.proveedores = proveedores);
+        console.info(this.proveedores);
 
-        this.recent = [
-          {user: users.alan, type: 'home', time: '9:12 pm'},
-          {user: users.eva, type: 'home', time: '7:45 pm'},
-          {user: users.nick, type: 'mobile', time: '5:29 pm'},
-          {user: users.lee, type: 'mobile', time: '11:24 am'},
-          {user: users.jack, type: 'mobile', time: '10:45 am'},
-          {user: users.kate, type: 'work', time: '9:42 am'},
-          {user: users.kate, type: 'work', time: '9:31 am'},
-          {user: users.jack, type: 'mobile', time: '8:01 am'},
-        ];
-      });
-
-   }
-
-  ngOnDestroy() {
-     this.themeSubscription.unsubscribe();
   }
-}
+  ngOnDestroy() { }
+  add(name: string): void {
+      name = name.trim();
+      if (!name) { return; }
+
+      this.proveedorService.create(name)
+        .then(proveedor => {
+          this.proveedores.push(proveedor);
+          this.selectedProveedor = null;
+        });
+    }
+
+    delete(proveedor: Proveedor): void {
+      this.proveedorService
+          .delete(proveedor.Id)
+          .then(() => {
+            this.proveedores = this.proveedores.filter(h => h !== proveedor);
+            if (this.selectedProveedor === proveedor) { this.selectedProveedor = null; }
+          });
+    }
+    onSelect(proveedor: Proveedor): void {
+      this.selectedProveedor = proveedor;
+      console.info('prooveedor', this.selectedProveedor);
+      this.getProductosProveedor(this.selectedProveedor);
+    }
+    getProductosProveedor(proveedor: Proveedor): void {
+      this.proveedorService.getProductosProveedor(proveedor.Id)
+      .then(productosProveedor => this.productosProveedor = productosProveedor);
+        this.getProductos();
+    }
+    getProductos() {
+      this.productoService.getProductos()
+      .then(productos => this.productos = productos);
+    }
+    addProducto(): void {
+        this.proveedorService.add(this.selectedProveedor, this.selectedValue)
+          .then(productosProveedor => {
+                        this.productosProveedor.push(productosProveedor);
+        });
+      }
+    }

@@ -6,6 +6,7 @@ import { PreparacionesComponent } from './preparaciones/preparaciones.component'
 import { MenusComponent } from './menus/menus.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { ComponentesComponent } from './componentes/componentes.component';
+import { TiposAlimentosComponent } from './tipos_alimentos/tipos_alimentos.component';
 const routes: Routes = [{
   path: '',
   component: AlimentosComponent,
@@ -29,6 +30,10 @@ const routes: Routes = [{
     path: 'componentes',
     component: ComponentesComponent,
   },
+  {
+    path: 'tipos_alimentos',
+    component: TiposAlimentosComponent,
+  },
 ],
 }];
 
@@ -44,4 +49,5 @@ export const routedComponents = [
   MenusComponent,
   ProveedoresComponent,
   ComponentesComponent,
+  TiposAlimentosComponent,
 ];

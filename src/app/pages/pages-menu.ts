@@ -54,6 +54,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Componentes',
         link: '/pages/alimentos/componentes',
       },
+      {
+        title: 'Tipos Alimentos',
+        link: '/pages/alimentos/tipos_alimentos',
+      },
     ],
 
   },

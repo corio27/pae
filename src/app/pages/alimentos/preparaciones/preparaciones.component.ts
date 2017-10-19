@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbThemeService, NbMediaBreakpoint, NbMediaBreakpointsService } from '@nebular/theme';
 import { Preparacion } from '../../../@core/data/preparacion';
+import { Producto } from '../../../@core/data/producto';
+import { ProductosPreparacion } from '../../../@core/data/productosPreparacion';
 import { PreparacionService } from '../../../@core/data/preparacion.service';
-import { HttpClient } from '@angular/common/http';
+import { ProductoService } from '../../../@core/data/producto.service';
+
 
 @Component({
   selector: 'ngx-preparaciones',
@@ -12,32 +14,19 @@ import { HttpClient } from '@angular/common/http';
 export class PreparacionesComponent implements OnInit, OnDestroy {
 
   preparaciones: Preparacion[];
-  contacts: any[];
-  recent: any[];
-  breakpoint: NbMediaBreakpoint;
-  breakpoints: any;
-  themeSubscription: any;
-  currentTheme: string;
+  productos: Producto[];
   selectedPreparacion: Preparacion;
-  constructor(private preparacionService: PreparacionService,
-              private themeService: NbThemeService,
-              private breakpointService: NbMediaBreakpointsService, private http: HttpClient) {
-                this.breakpoints = breakpointService.getBreakpointsMap();
-                this.themeSubscription = themeService.onMediaQueryChange()
-                  .subscribe(([oldValue, newValue]) => {
-                    this.breakpoint = newValue;
-                  });
-
-    }
+  productosPreparacion: ProductosPreparacion[];
+  selectedValue: Producto;
+  constructor(private preparacionService: PreparacionService, private productoService: ProductoService) { }
 
     ngOnInit() {
-        this.preparacionService.getPreparaciones().then(preparaciones => this.preparaciones = preparaciones);
+        this.preparacionService.getPreparaciones()
+        .then(preparaciones => this.preparaciones = preparaciones);
         console.info(this.preparaciones);
 
   }
-  ngOnDestroy() {
-     this.themeSubscription.unsubscribe();
-  }
+  ngOnDestroy() { }
   add(name: string): void {
       name = name.trim();
       if (!name) { return; }
@@ -62,6 +51,18 @@ export class PreparacionesComponent implements OnInit, OnDestroy {
       this.getProductosPreparacion(this.selectedPreparacion);
     }
     getProductosPreparacion(preparacion: Preparacion): void {
-
+      this.preparacionService.getProductosPreparacion(preparacion.Id)
+      .then(productosPreparacion => this.productosPreparacion = productosPreparacion);
+        this.getProductos();
     }
+    getProductos() {
+      this.productoService.getProductos()
+      .then(productos => this.productos = productos);
+    }
+    addProducto(): void {
+        this.preparacionService.add(this.selectedPreparacion, this.selectedValue)
+          .then(productosPreparacion => {
+                        this.productosPreparacion.push(productosPreparacion);
+        });
+      }
 }

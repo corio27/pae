@@ -2,19 +2,7 @@
 @import '~@nebular/theme/styles/global/bootstrap/hero-buttons';
 
 @include nb-install-component() {
-  nb-tabset {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  nb-tab {
-    flex: 1;
-    overflow-y: auto;
-    padding: 0;
-  }
-
-  .contact {
+  .componentes {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -60,5 +48,3 @@
     }
   }
 }
-
-

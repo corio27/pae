@@ -1,38 +1,51 @@
-<nb-card [size]="breakpoint.width >= breakpoints.xxxl || breakpoint.width < breakpoints.md ? 'large' : 'xlarge'">
-  <nb-tabset fullWidth>
-    <nb-tab tabTitle="Estudiantes">
-      <div class="contact" *ngFor="let c of contacts">
-        <nb-user [picture]="c.user.picture" [name]="c.user.name" [title]="c.type" size="large"></nb-user>
-        <i class="i-contact nb-phone"></i>
-      </div>
-    </nb-tab>
-    <nb-tab tabTitle="Docentes">
-      <div class="contact" *ngFor="let c of contacts">
-        <nb-user [picture]="c.user.picture" [name]="c.user.name" [title]="c.type" size="large"></nb-user>
-        <i class="i-contact nb-phone"></i>
-      </div>
-    </nb-tab>
-    <nb-tab tabTitle="Administrativos">
-      <div class="contact" *ngFor="let c of recent">
-        <nb-user [picture]="c.user.picture" [name]="c.user.name" [title]="c.type" size="large"></nb-user>
-        <span class="time">{{ c.time }}</span>
-      </div>
-    </nb-tab>
-    <nb-tab tabTitle="PAE">
-      <div class="contact" *ngFor="let c of recent">
-        <nb-user [picture]="c.user.picture" [name]="c.user.name" [title]="c.type" size="large"></nb-user>
-        <span class="time">{{ c.time }}</span>
-      </div>
-    </nb-tab>
-  </nb-tabset>
-  <nb-card-footer>
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Buscar...">
-      <span class="input-group-btn">
-        <button class="btn btn-danger">
-          Agregar
-        </button>
-      </span>
+<nb-card>
+  <nb-card-header>
+    Gestionar Proveedor
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="proveedores" *ngFor="let proveedor of proveedores" (click)="onSelect(proveedor)">
+      <nb-user  [name]="proveedor.Nombre"  [title]="nb-trash" size="large">
+
+      </nb-user>
+      <i class="nb-trash" size="middle"
+      (click)="delete(proveedor); $event.stopPropagation()"></i>
     </div>
-  </nb-card-footer>
+    </nb-card-body>
+    <nb-card-footer>
+      <div class="input-group">
+        <input #NombreProveedor />
+        <button (click)="add(NombreProveedor.value); NombreProveedor.value=''">
+          Añadir
+        </button>
+      </div>
+    </nb-card-footer>
+</nb-card>
+<div *ngIf="selectedProveedor">
+<nb-card>
+  <nb-card-header>
+    PRODUCTOS DE {{selectedProveedor.Nombre}}
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="productosProveedor" *ngFor="let productoProveedor of productosProveedor">
+      <nb-user  [name]="productoProveedor.ProductoId.Nombre"   size="large"></nb-user>
+
+
+    </div>
+
+  </nb-card-body>
+    <nb-card-footer>
+
+        <div class="form-group">
+          <label>Producto</label>
+          <select [(ngModel)]="selectedValue">
+            <option *ngFor="let p of productos" [ngValue]="p">{{p.Nombre}}</option>
+          </select>
+        </div>
+        <button (click)="addProducto();">
+          Añadir
+        </button>
+
+    </nb-card-footer>
 </nb-card>

@@ -3,12 +3,13 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/toPromise';
 import { Producto } from './producto';
-
+import { TipoAlimento } from './tipoAlimento';
 
 @Injectable()
 export class ProductoService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private productoUrl = '/v1/producto';
+  objeto: string;
  constructor(private http: Http) { }
 
   getProductos(): Promise<Producto[]> {
@@ -40,10 +41,12 @@ getProducto(id: number): Promise<Producto> {
       .catch(this.handleError);
   }
 
-  create(name: string, codigo: number): Promise<Producto> {
-    console.info('Codigo', JSON.stringify({Nombre: name, Codigo: codigo}));
+  create(name: string, codigo: number, tipoAlimentoId: TipoAlimento): Promise<Producto> {
+    this.objeto =
+    '{"Nombre":"' + name + '", "Codigo":' + codigo + ', "TipoAlimentoId":' + JSON.stringify(tipoAlimentoId) + '}';
+    console.info(this.objeto);
     return this.http
-      .post(this.productoUrl, '{ "Nombre":"' + name + '", "Codigo":' + codigo + '}', {headers: this.headers})
+      .post(this.productoUrl, this.objeto, {headers: this.headers})
       .toPromise()
       .then(res => res.json() as Producto)
       .catch(this.handleError);

@@ -1,0 +1,22 @@
+<nb-card>
+  <nb-card-header>
+    Gestionar Tipos Alimentos
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="tiposAlimentos" *ngFor="let tipoAlimento of tiposAlimentos" (click)="onSelect(tipoAlimento)">
+      <nb-user  [name]="tipoAlimento.Nombre"   size="large"></nb-user>
+      <button class="delete"
+      (click)="delete(tipoAlimento); $event.stopPropagation()">Eliminar</button>
+
+    </div>
+    </nb-card-body>
+    <nb-card-footer>
+      <div class="input-group">
+        <input #Nombre />
+        <button (click)="add(Nombre.value); Nombre.value=''">
+          Añadir
+        </button>
+      </div>
+    </nb-card-footer>
+</nb-card>

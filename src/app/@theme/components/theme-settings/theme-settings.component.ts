@@ -35,7 +35,7 @@ export class ThemeSettingsComponent {
 
   constructor(protected stateService: StateService) {
     this.stateService.getLayoutStates()
-      .subscribe((layouts: any[]) => this.layouts = layouts);
+      .subscribe((layouts: any[] ) => this.layouts = layouts);
 
     this.stateService.getSidebarStates()
       .subscribe((sidebars: any[]) => this.sidebars = sidebars);

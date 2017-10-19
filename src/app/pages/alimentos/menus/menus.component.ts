@@ -1,9 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbThemeService, NbMediaBreakpoint, NbMediaBreakpointsService } from '@nebular/theme';
-import { Persona } from '../../../@core/data/persona';
-import { PersonaService } from '../../../@core/data/persona.service';
-import { HttpClient } from '@angular/common/http';
-import { UserService } from '../../../@core/data/users.service';
+import { Menu } from '../../../@core/data/menu';
+import { Componente } from '../../../@core/data/componente';
+import { ComponentesMenu } from '../../../@core/data/componentesMenu';
+import { Preparacion } from '../../../@core/data/preparacion';
+import { PreparacionesComponente } from '../../../@core/data/preparacionesComponente';
+import { MenuService } from '../../../@core/data/menu.service';
+import { ComponenteService } from '../../../@core/data/componente.service';
+import { PreparacionService } from '../../../@core/data/preparacion.service';
+
+
 @Component({
   selector: 'ngx-menus',
   styleUrls: ['./menus.component.scss'],
@@ -11,58 +16,80 @@ import { UserService } from '../../../@core/data/users.service';
 })
 export class MenusComponent implements OnInit, OnDestroy {
 
-  personas: Persona[];
-  contacts: any[];
-  recent: any[];
-  breakpoint: NbMediaBreakpoint;
-  breakpoints: any;
-  themeSubscription: any;
-  currentTheme: string;
-
-  constructor(private personaService: PersonaService,
-              private userService: UserService,
-              private themeService: NbThemeService,
-              private breakpointService: NbMediaBreakpointsService, private http: HttpClient) {
-                this.breakpoints = breakpointService.getBreakpointsMap();
-                this.themeSubscription = themeService.onMediaQueryChange()
-                  .subscribe(([oldValue, newValue]) => {
-                    this.breakpoint = newValue;
-                  });
-
-    }
+  menus: Menu[];
+  componentes: Componente[];
+  selectedMenu: Menu;
+  selectedPreparacion: Preparacion;
+  preparaciones: Preparacion[];
+  preparacionesComponente: PreparacionesComponente[];
+  componentesMenu: ComponentesMenu[];
+  selectedComponente: Componente;
+  selectedComponenteMenu: ComponentesMenu;
+  constructor(private menuService: MenuService,
+    private componenteService: ComponenteService, private preparacionService: PreparacionService) { }
 
     ngOnInit() {
-       // this.personaService.getPersonas().then(personas => this.personas = personas);
-    //    this.http.get('v1/persona').subscribe(data => {
-    //      this.personas = data as Persona[];
-    //      console.info('*r4eb', this.personas);
-    //   })
-      this.userService.getUsers()
-      .subscribe((users: any) => {
-        this.contacts = [
-          {user: users.nick, type: 'mobile'},
-          {user: users.eva, type: 'home'},
-          {user: users.jack, type: 'mobile'},
-          {user: users.lee, type: 'mobile'},
-          {user: users.alan, type: 'home'},
-          {user: users.kate, type: 'work'},
-        ];
+        this.menuService.getMenus()
+        .then(menus => this.menus = menus);
+        console.info(this.menus);
 
-        this.recent = [
-          {user: users.alan, type: 'home', time: '9:12 pm'},
-          {user: users.eva, type: 'home', time: '7:45 pm'},
-          {user: users.nick, type: 'mobile', time: '5:29 pm'},
-          {user: users.lee, type: 'mobile', time: '11:24 am'},
-          {user: users.jack, type: 'mobile', time: '10:45 am'},
-          {user: users.kate, type: 'work', time: '9:42 am'},
-          {user: users.kate, type: 'work', time: '9:31 am'},
-          {user: users.jack, type: 'mobile', time: '8:01 am'},
-        ];
-      });
-
-   }
-
-  ngOnDestroy() {
-     this.themeSubscription.unsubscribe();
   }
-}
+  ngOnDestroy() { }
+  add(name: string): void {
+      name = name.trim();
+      if (!name) { return; }
+
+      this.menuService.create(name)
+        .then(menu => {
+          this.menus.push(menu);
+          this.selectedMenu = null;
+        });
+    }
+
+    delete(menu: Menu): void {
+      this.menuService
+          .delete(menu.Id)
+          .then(() => {
+            this.menus = this.menus.filter(h => h !== menu);
+            if (this.selectedMenu === menu) { this.selectedMenu = null; }
+          });
+    }
+    onSelect(menu: Menu): void {
+      this.selectedMenu = menu;
+      this.getComponentesMenu(this.selectedMenu);
+    }
+    onSelectComponenteMenu(componenteMenu: ComponentesMenu): void {
+      this.selectedComponenteMenu = componenteMenu;
+      this.getPreparacionesComponente(this.selectedComponenteMenu);
+    }
+    getComponentesMenu(menu: Menu): void {
+      this.menuService.getComponentesMenu(menu.Id)
+      .then(componentesMenu => this.componentesMenu = componentesMenu);
+        this.getComponentes();
+    }
+    getPreparacionesComponente(componenteMenu: ComponentesMenu): void {
+      this.menuService.getPreparacionesComponente(componenteMenu.Id)
+      .then(preparacionesComponente => this.preparacionesComponente = preparacionesComponente);
+        this.getPreparaciones();
+    }
+    getComponentes() {
+      this.componenteService.getComponentes()
+      .then(componentes => this.componentes = componentes);
+    }
+    addComponente(): void {
+        this.menuService.addComponente(this.selectedMenu, this.selectedComponente)
+          .then(componentesMenu => {
+                        this.componentesMenu.push(componentesMenu);
+        });
+      }
+      getPreparaciones() {
+        this.preparacionService.getPreparaciones()
+        .then(preparaciones => this.preparaciones = preparaciones);
+      }
+      addPreparacion(): void {
+          this.menuService.addPreparacion(this.selectedComponenteMenu, this.selectedPreparacion)
+            .then(preparacionesComponente => {
+                          this.preparacionesComponente.push(preparacionesComponente);
+          });
+        }
+    }

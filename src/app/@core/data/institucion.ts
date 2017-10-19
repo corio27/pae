@@ -1,15 +1,13 @@
 export class Institucion {
     Id: number;
+    Descripcion: string;
     CantidadManipuladoras: number;
     CodigoDane: number;
     CodigoDanePrincipal: number;
-    CoordinadorFundalianza: number;
-    CoordinadorPma: number;
     EsPrincipal: number;
-    EtcId: number;
-    MunicipioId: number;
+    EtcId: any[];
+    MunicipioId: any[];
     Nombre: string;
-    RectorId: number;
-    TipoInstitucionId: number;
-    TipoMinutaTipoModalidadId: number;
+    TipoInstitucionId: any[];
+    TipoMinutaTipoModalidadId: any[];
   }

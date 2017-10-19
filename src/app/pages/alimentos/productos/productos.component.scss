@@ -15,7 +15,7 @@
     border-top-left-radius: nb-theme(card-border-radius);
     border-top-right-radius: nb-theme(card-border-radius);
     flex: 1;
-    
+
   }
 
   .details {
@@ -61,6 +61,33 @@
       i {
         font-size: 1.75rem;
       }
+    }
+  }
+  nb-user /deep/ {
+    .info-container {
+      margin-left: 0.875rem;
+    }
+
+    .user-name {
+      font-damily: nb-theme(font-secondary);
+      font-weight: nb-theme(font-weight-bold);
+      color: nb-theme(color-fg-heading);
+      font-size: 1.25rem;
+
+      @include nb-for-theme(cosmic) {
+        font-weight: nb-theme(font-weight-bolder);
+      }
+    }
+
+    .user-title {
+      font-size: 0.875rem;
+      font-weight: nb-theme(font-weight-light);
+      text-transform: uppercase;
+    }
+    .user-tipo {
+      font-size: 0.875rem;
+      font-weight: nb-theme(font-weight-light);
+      text-transform: uppercase;
     }
   }
 }

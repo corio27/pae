@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { LocalDataSource } from 'ng2-smart-table';
 import { NbThemeService, NbMediaBreakpoint, NbMediaBreakpointsService } from '@nebular/theme';
 import { Componente } from '../../../@core/data/componente';
 import { ComponenteService } from '../../../@core/data/componente.service';
