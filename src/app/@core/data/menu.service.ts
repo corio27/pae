@@ -89,9 +89,9 @@ getMenu(id: number): Promise<Menu> {
      .then(res => res.json() as ComponentesMenu)
      .catch(this.handleError);
  }
- addPreparacion(componenteId: ComponentesMenu, preparacionId: Preparacion ): Promise<PreparacionesComponente> {
+ addPreparacion(componenteMenuId: ComponentesMenu, preparacionId: Preparacion ): Promise<PreparacionesComponente> {
       this.objeto = '{"Id": null, "ComponentesMenuId":'
-     + JSON.stringify(componenteId) + ', "PrepacionId":' + JSON.stringify(preparacionId) + '}';
+     + JSON.stringify(componenteMenuId) + ', "PreparacionId":' + JSON.stringify(preparacionId) + '}';
      console.info(this.objeto);
    return this.http
      .post(this.prepracionesComponenteUrl, this.objeto, {headers: this.headers})

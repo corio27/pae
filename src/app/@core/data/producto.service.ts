@@ -8,7 +8,7 @@ import { TipoAlimento } from './tipoAlimento';
 @Injectable()
 export class ProductoService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private productoUrl = '/v1/producto';
+  private productoUrl = 'v1/producto';
   objeto: string;
  constructor(private http: Http) { }
 

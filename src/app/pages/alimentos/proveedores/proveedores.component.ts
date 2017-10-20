@@ -53,6 +53,7 @@ export class ProveedoresComponent implements OnInit, OnDestroy {
     getProductosProveedor(proveedor: Proveedor): void {
       this.proveedorService.getProductosProveedor(proveedor.Id)
       .then(productosProveedor => this.productosProveedor = productosProveedor);
+        this.productos = null;
         this.getProductos();
     }
     getProductos() {
