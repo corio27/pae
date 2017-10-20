@@ -8,7 +8,7 @@ import { TipoModalidad } from './tipoModalidad';
 @Injectable()
 export class TipoModalidadService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private tipoModalidadUrl = '/v1/tipo_modalidad';
+  private tipoModalidadUrl = 'v1/tipo_modalidad';
  constructor(private http: Http) { }
 
   getTiposModalidades(): Promise<TipoModalidad[]> {

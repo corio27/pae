@@ -10,9 +10,9 @@ import { ProductosProveedor } from './productosProveedor';
 @Injectable()
 export class ProveedorService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private proveedorUrl = '/v1/proveedor';
-  private productosProveedorUrlQuery = '/v1/productos_proveedor/?query=ProveedorId';
-  private productosProveedorUrl= '/v1/productos_proveedor';
+  private proveedorUrl = 'v1/proveedor';
+  private productosProveedorUrlQuery = 'v1/productos_proveedor/?query=ProveedorId';
+  private productosProveedorUrl= 'v1/productos_proveedor';
   private objeto: string;
  constructor(private http: Http) { }
 

@@ -8,7 +8,7 @@ import { TipoMinuta } from './tipoMinuta';
 @Injectable()
 export class TipoMinutaService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private tipoMinutaUrl = '/v1/tipo_minuta';
+  private tipoMinutaUrl = 'v1/tipo_minuta';
  constructor(private http: Http) { }
 
   getTiposMinutas(): Promise<TipoMinuta[]> {

@@ -13,7 +13,7 @@ import { PreparacionesComponente } from './preparacionesComponente';
 @Injectable()
 export class MenuService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private menuUrl = '/v1/menu';
+  private menuUrl = 'v1/menu';
   private componentesMenuUrlQuery = '/v1/componentes_menu/?query=MenuId';
   private componentesMenuUrl= '/v1/componentes_menu';
   private prepracionesComponenteUrl= '/v1/preparaciones_componente';

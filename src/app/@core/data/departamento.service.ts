@@ -8,7 +8,7 @@ import { Departamento } from './departamento';
 @Injectable()
 export class DepartamentoService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private departamentoUrl = '/v1/departamento';
+  private departamentoUrl = 'v1/departamento';
  constructor(private http: Http) { }
 
   getDepartamentos(): Promise<Departamento[]> {

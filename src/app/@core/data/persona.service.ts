@@ -8,7 +8,7 @@ import { Persona } from './persona';
 @Injectable()
 export class PersonaService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private personaUrl = '/v1/persona';
+  private personaUrl = 'v1/persona';
  constructor(private http: Http) { }
 
   getPersonas(): Promise<Persona[]> {

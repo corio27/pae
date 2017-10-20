@@ -8,7 +8,7 @@ import { Componente } from './componente';
 @Injectable()
 export class ComponenteService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private componenteUrl = '/v1/componente';
+  private componenteUrl = 'v1/componente';
   constructor(private http: Http) { };
 
   getComponentes(): Promise<Componente[]> {

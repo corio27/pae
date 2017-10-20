@@ -8,7 +8,7 @@ import { Etc } from './etc';
 @Injectable()
 export class EtcService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private etcUrl = '/v1/etc';
+  private etcUrl = 'v1/etc';
  constructor(private http: Http) { }
 
   getEtcs(): Promise<Etc[]> {

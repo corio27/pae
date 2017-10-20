@@ -8,7 +8,7 @@ import { Municipio } from './municipio';
 @Injectable()
 export class MunicipioService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private municipioUrl = '/v1/municipio';
+  private municipioUrl = 'v1/municipio';
  constructor(private http: Http) { }
 
   getMunicipios(): Promise<Municipio[]> {
