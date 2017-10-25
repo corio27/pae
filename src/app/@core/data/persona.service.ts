@@ -26,6 +26,15 @@ getPersona(id: number): Promise<Persona> {
       .then(response => response.json().data as Persona)
       .catch(this.handleError);
   }
+  update(persona: Persona): Promise<Persona> {
+    const url = `${this.personaUrl}/${persona.Id}`;
+    console.info(JSON.stringify(persona));
+    return this.http
+      .put(url, JSON.stringify(persona), {headers: this.headers})
+      .toPromise()
+      .then(() => persona)
+      .catch(this.handleError);
+  }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

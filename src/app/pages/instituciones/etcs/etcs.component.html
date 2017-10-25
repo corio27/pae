@@ -1,0 +1,22 @@
+<nb-card>
+  <nb-card-header>
+    Gestionar ETC
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="etcs" *ngFor="let etc of etcs" (click)="onSelect(etc)">
+      <nb-user  [name]="etc.Nombre"   size="large"></nb-user>
+      <button class="delete"
+      (click)="delete(etc); $event.stopPropagation()">Eliminar</button>
+
+    </div>
+    </nb-card-body>
+    <nb-card-footer>
+      <div class="input-group">
+        <input #Nombre />
+        <button (click)="add(Nombre.value); Nombre.value=''">
+          Añadir
+        </button>
+      </div>
+    </nb-card-footer>
+</nb-card>

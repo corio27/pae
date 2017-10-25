@@ -5,6 +5,7 @@ import { InstitucionesComponent } from './instituciones.component';
 import { SmartTableComponent } from './smart-table/smart-table.component';
 import { FormCrearComponent } from './crear/form-crear.component';
 import { DashboardComponent} from './dashboard/dashboard.component';
+import { EtcsComponent} from './etcs/etcs.component';
 const routes: Routes = [{
   path: '',
   component: InstitucionesComponent,
@@ -15,6 +16,10 @@ const routes: Routes = [{
   {
     path: 'crear',
     component: FormCrearComponent,
+  },
+  {
+    path: 'etcs',
+    component: EtcsComponent,
   },
   {
     path: 'dashboard',
@@ -33,4 +38,5 @@ export const routedComponents = [
   SmartTableComponent,
   FormCrearComponent,
   DashboardComponent,
+  EtcsComponent,
 ];

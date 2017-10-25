@@ -27,6 +27,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Dashboard',
         link: '/pages/instituciones/dashboard',
       },
+      {
+        title: 'Etc',
+        link: '/pages/instituciones/etcs',
+      },
     ],
 
   },
