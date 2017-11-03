@@ -17,11 +17,11 @@ import { TipoModalidadService } from '../../../@core/data/tipoModalidad.service'
 
 @Component({
   selector: 'ngx-form-layouts',
-  styleUrls: ['./form-crear.component.scss'],
-  templateUrl: './form-crear.component.html',
+  styleUrls: ['./formulario.component.scss'],
+  templateUrl: './formulario.component.html',
 })
 
-export class FormCrearComponent implements OnInit, OnDestroy {
+export class FormularioComponent implements OnInit, OnDestroy {
   breakpoint: NbMediaBreakpoint;
   breakpoints: any;
   themeSubscription: any;

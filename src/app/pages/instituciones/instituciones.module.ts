@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { AgmCoreModule } from '@agm/core';
 import { ThemeModule } from '../../@theme/theme.module';
 import { InstitucionesRoutingModule, routedComponents } from './instituciones-routing.module';
 import { SmartTableService } from '../../@core/data/smart-table.service';
@@ -13,6 +14,7 @@ import { KittenComponent } from './kitten/kitten.component';
     InstitucionesRoutingModule,
     Ng2SmartTableModule,
     AngularEchartsModule,
+        AgmCoreModule.forRoot(),
   ],
   declarations: [
     ...routedComponents,

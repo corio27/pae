@@ -19,6 +19,8 @@ import { TipoMinutaService } from './tipoMinuta.service';
 import { TipoModalidadService } from './tipoModalidad.service';
 import { ProveedorService } from './proveedor.service';
 import { MenuService } from './menu.service';
+import { UnidadMedidaService } from './unidadMedida.service';
+import { RolService } from './rol.service';
 
 const SERVICES = [
   UserService,
@@ -40,6 +42,8 @@ const SERVICES = [
   TipoInstitucionService,
   ProveedorService,
   MenuService,
+  UnidadMedidaService,
+  RolService,
   ];
 
 @NgModule({

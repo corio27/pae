@@ -12,6 +12,21 @@ export const MENU_ITEMS: NbMenuItem[] = [
     group: true,
   },
   {
+    title: 'Administracion',
+    icon: 'fa ',
+    children: [
+      {
+        title: 'Roles',
+        link: '/pages/administracion/roles',
+      },
+      {
+        title: 'Personas',
+        link: '/pages/administracion/personas',
+      },
+    ],
+
+  },
+  {
     title: 'Instituciones',
     icon: 'fa fa-bank',
     children: [
@@ -61,6 +76,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Tipos Alimentos',
         link: '/pages/alimentos/tipos_alimentos',
+      },
+      {
+        title: 'Unidad Medida',
+        link: '/pages/alimentos/unidades_medida',
       },
     ],
 

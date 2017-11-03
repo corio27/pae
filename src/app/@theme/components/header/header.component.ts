@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { NbMenuService, NbSidebarService } from '@nebular/theme';
+import { NbMenuService, NbSidebarService, NbSearchService } from '@nebular/theme';
 import { UserService } from '../../../@core/data/users.service';
-
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
 
 
@@ -23,6 +22,7 @@ export class HeaderComponent implements OnInit {
               private menuService: NbMenuService,
               private userService: UserService,
               private analyticsService: AnalyticsService,
+              private searchService: NbSearchService,
               ) {
   }
 
@@ -47,6 +47,9 @@ export class HeaderComponent implements OnInit {
 
   startSearch() {
       this.analyticsService.trackEvent('startSearch');
+  }
+  buscarInstitucion(event) {
+      console.info(event);
   }
 
 

@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Proveedor } from '../../../@core/data/proveedor';
 import { Producto } from '../../../@core/data/producto';
+import { UnidadMedida } from '../../../@core/data/unidadMedida';
 import { ProductosProveedor } from '../../../@core/data/productosProveedor';
 import { ProveedorService } from '../../../@core/data/proveedor.service';
 import { ProductoService } from '../../../@core/data/producto.service';
-
+import { UnidadMedidaService } from '../../../@core/data/unidadMedida.service';
 
 @Component({
   selector: 'ngx-proveedores',
@@ -17,8 +18,11 @@ export class ProveedoresComponent implements OnInit, OnDestroy {
   productos: Producto[];
   selectedProveedor: Proveedor;
   productosProveedor: ProductosProveedor[];
+  unidadMedidas: UnidadMedida[];
   selectedValue: Producto;
-  constructor(private proveedorService: ProveedorService, private productoService: ProductoService) { }
+  selectedUnidadMedida: UnidadMedida;
+  constructor(private proveedorService: ProveedorService, private productoService: ProductoService,
+    private unidadMedidaService: UnidadMedidaService ) { }
 
     ngOnInit() {
         this.proveedorService.getProveedores().then(proveedores => this.proveedores = proveedores);
@@ -59,6 +63,8 @@ export class ProveedoresComponent implements OnInit, OnDestroy {
     getProductos() {
       this.productoService.getProductos()
       .then(productos => this.productos = productos);
+      this.unidadMedidaService.getUnidadesMedida()
+      .then(unidadMedidas => this.unidadMedidas = unidadMedidas);
     }
     addProducto(): void {
         this.proveedorService.add(this.selectedProveedor, this.selectedValue)

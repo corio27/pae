@@ -3,9 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { InstitucionesComponent } from './instituciones.component';
 import { SmartTableComponent } from './smart-table/smart-table.component';
-import { FormCrearComponent } from './crear/form-crear.component';
+import { FormularioComponent } from './formulario/formulario.component';
 import { DashboardComponent} from './dashboard/dashboard.component';
 import { EtcsComponent} from './etcs/etcs.component';
+import { ResultadosComponent} from './resultados/resultados.component';
+import { GmapsComponent} from './mapa/gmaps.component';
 const routes: Routes = [{
   path: '',
   component: InstitucionesComponent,
@@ -15,7 +17,7 @@ const routes: Routes = [{
   },
   {
     path: 'crear',
-    component: FormCrearComponent,
+    component: FormularioComponent,
   },
   {
     path: 'etcs',
@@ -24,7 +26,16 @@ const routes: Routes = [{
   {
     path: 'dashboard',
     component: DashboardComponent,
-  }],
+  },
+  {
+    path: 'resultados',
+    component: ResultadosComponent,
+  },
+  {
+    path: 'mapa',
+    component: GmapsComponent,
+  },
+],
 }];
 
 @NgModule({
@@ -36,7 +47,9 @@ export class InstitucionesRoutingModule { }
 export const routedComponents = [
   InstitucionesComponent,
   SmartTableComponent,
-  FormCrearComponent,
+  FormularioComponent,
   DashboardComponent,
   EtcsComponent,
+  ResultadosComponent,
+  GmapsComponent,
 ];

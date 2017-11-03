@@ -16,13 +16,13 @@ import { PreparacionService } from '../../../@core/data/preparacion.service';
 })
 export class MenusComponent implements OnInit, OnDestroy {
 
-  menus: Menu[];
-  componentes: Componente[];
+  menus: Menu[] = [];
+  componentes: Componente[] = [];
   selectedMenu: Menu;
   selectedPreparacion: Preparacion;
-  preparaciones: Preparacion[];
-  preparacionesComponente: PreparacionesComponente[];
-  componentesMenu: ComponentesMenu[];
+  preparaciones: Preparacion[] = [];
+  preparacionesComponente: PreparacionesComponente[] = [];
+  componentesMenu: ComponentesMenu[] = [];
   selectedComponente: Componente;
   selectedComponenteMenu: ComponentesMenu;
   constructor(private menuService: MenuService,
@@ -31,8 +31,7 @@ export class MenusComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.menuService.getMenus()
         .then(menus => this.menus = menus);
-        console.info(this.menus);
-
+        this.getComponentes();
   }
   ngOnDestroy() { }
   add(name: string): void {
@@ -42,8 +41,19 @@ export class MenusComponent implements OnInit, OnDestroy {
       this.menuService.create(name)
         .then(menu => {
           this.menus.push(menu);
-          this.selectedMenu = null;
+            console.info(menu);
+            this.componentes.forEach(componente => {
+              this.menuService.addComponente(menu, componente)
+              .then(componenteMenu => {
+                console.info(menu);
+                console.info(componente);
+                  //          this.componentesMenu.push(componenteMenu);
+            });
+            this.selectedMenu = null;
+          });
         });
+
+
     }
 
     delete(menu: Menu): void {
@@ -65,7 +75,7 @@ export class MenusComponent implements OnInit, OnDestroy {
     getComponentesMenu(menu: Menu): void {
       this.menuService.getComponentesMenu(menu.Id)
       .then(componentesMenu => this.componentesMenu = componentesMenu);
-        this.getComponentes();
+
     }
     getPreparacionesComponente(componenteMenu: ComponentesMenu): void {
       this.menuService.getPreparacionesComponente(componenteMenu.Id)

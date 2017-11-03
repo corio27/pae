@@ -1,0 +1,36 @@
+<div class="col-md-6">
+<nb-card>
+  <nb-card-header>
+    Gestionar Unidades Medida
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="unidadMedidas" *ngFor="let unidadMedida of unidadMedidas" (click)="onSelect(unidadMedida)">
+      <nb-user  [name]="unidadMedida.Nombre"   size="large"></nb-user>
+      <button class="delete"
+      (click)="delete(unidadMedida); $event.stopPropagation()">Eliminar</button>
+
+    </div>
+    </nb-card-body>
+    <nb-card-footer>
+
+      <div class="input-group">
+        <label>Nombre</label>
+      </div>
+      <div class="input-group">
+        <input #Nombre class="form-control" />
+        </div>
+        <div class="input-group">
+        <label>Peso (gr)</label>
+      </div>
+      <div class="input-group">
+        <input #Peso class="form-control" />
+      </div>
+        <button class="btn btn-primary" (click)="add(Nombre.value); Nombre.value=''">
+          Añadir
+        </button>
+
+
+    </nb-card-footer>
+</nb-card>
+</div>

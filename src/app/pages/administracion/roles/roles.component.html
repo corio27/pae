@@ -1,0 +1,22 @@
+<nb-card>
+  <nb-card-header>
+    Gestionar Roles
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="roles" *ngFor="let rol of roles" (click)="onSelect(rol)">
+      <nb-user  [name]="rol.Nombre"   size="large"></nb-user>
+      <button class="delete"
+      (click)="delete(rol); $event.stopPropagation()">Eliminar</button>
+
+    </div>
+    </nb-card-body>
+    <nb-card-footer>
+      <div class="input-group">
+        <input #Nombre />
+        <button (click)="add(Nombre.value); Nombre.value=''">
+          Añadir
+        </button>
+      </div>
+    </nb-card-footer>
+</nb-card>
