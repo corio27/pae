@@ -13,7 +13,7 @@ export class ProductoService {
  constructor(private http: Http) { }
 
   getProductos(): Promise<Producto[]> {
-  return this.http.get('v1/producto')
+  return this.http.get('v1/producto/?limit=-1')
   .toPromise()
   .then(response  => response.json() as Producto[])
   .catch(this.handleError);

@@ -1,2 +1,12 @@
 
-  <ngx-search-input placeholder="Buscar Personas...." (search)="enBuscar($event)" tag="prueba"></ngx-search-input>
+  <ngx-search-input placeholder="Buscar Instituciones...." (search)="enBuscar($event)" tag="prueba"></ngx-search-input>
+  <div >
+    <ul class="search-result">
+      <li *ngFor="let item of filteredInstituciones" >
+        <a routerLink="/pages/instituciones/dashboard/{{item.Id}}">
+          {{item.Nombre}}
+        </a>
+      </li>
+
+    </ul>
+</div>

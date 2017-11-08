@@ -1,21 +1,20 @@
+<div *ngIf="institucion">
 <nb-card size="large">
   <nb-card-body>
     <div class="picture"  style.background-image="url('assets/images/kitten-{{currentTheme}}.png')"></div>
 
     <div class="details">
       <div class="title">
-        CENTRO EDUCATIVO DE SAN PEDRO
+      {{institucion.Nombre}}
       </div>
       <div class="description">
-      San Pedro es una sede del establecimiento Centro Rural Luis A. Brito De San Pedro
-      San Pedro cuenta con los niveles Preescolar,Básica Secundaria,Básica Primaria y grados 0,1,2,3,4,5,6,7,8,9,20,21
-
+      {{institucion.Descripcion}}
       </div>
       <div class="properties">
-        <li>Codigo Dane:244078000542</li>
-        <li>Departamento:LA GUAJIRA</li>
-        <li>Municipio:BARRANCAS</li>
-        <li>Tipo Institución:RURAL</li>
+        <li>{{institucion.CodigoDane}}</li>
+        <li *ngIf="municipio">{{municipio.Nombre}}</li>
+        <li *ngIf="departamento">{{departamento.Nombre}}</li>
+        <li *ngIf="tipoInstitucion">{{tipoInstitucion.Nombre}}</li>
       </div>
     </div>
   </nb-card-body>
@@ -36,3 +35,4 @@
     </a>
   </nb-card-footer>
 </nb-card>
+</div>

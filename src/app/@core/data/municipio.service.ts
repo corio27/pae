@@ -19,11 +19,11 @@ export class MunicipioService {
 }
 
 
-getProducto(id: number): Promise<Municipio> {
+getMunicipio(id: number): Promise<Municipio> {
     const url = `${this.municipioUrl}/${id}`;
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json().data as Municipio)
+      .then(response => response.json() as Municipio)
       .catch(this.handleError);
   }
 

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { InstitucionesComponent } from './instituciones.component';
 import { SmartTableComponent } from './smart-table/smart-table.component';
 import { FormularioComponent } from './formulario/formulario.component';
@@ -8,6 +7,7 @@ import { DashboardComponent} from './dashboard/dashboard.component';
 import { EtcsComponent} from './etcs/etcs.component';
 import { ResultadosComponent} from './resultados/resultados.component';
 import { GmapsComponent} from './mapa/gmaps.component';
+import { DespachosComponent} from './despachos/despachos.component';
 const routes: Routes = [{
   path: '',
   component: InstitucionesComponent,
@@ -24,7 +24,7 @@ const routes: Routes = [{
     component: EtcsComponent,
   },
   {
-    path: 'dashboard',
+    path: 'dashboard/:id',
     component: DashboardComponent,
   },
   {
@@ -34,6 +34,10 @@ const routes: Routes = [{
   {
     path: 'mapa',
     component: GmapsComponent,
+  },
+  {
+    path: 'despachos',
+    component: DespachosComponent,
   },
 ],
 }];
@@ -52,4 +56,5 @@ export const routedComponents = [
   EtcsComponent,
   ResultadosComponent,
   GmapsComponent,
+  DespachosComponent,
 ];

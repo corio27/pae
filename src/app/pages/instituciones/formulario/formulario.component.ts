@@ -43,6 +43,7 @@ export class FormularioComponent implements OnInit, OnDestroy {
   tiposInstituciones: TipoInstitucion[];
   selectedEtc: Etc;
   etcs: Etc[];
+
   constructor( private institucionService: InstitucionService,
     private etcService: EtcService,
     private departamentoService: DepartamentoService,
@@ -81,12 +82,13 @@ export class FormularioComponent implements OnInit, OnDestroy {
     console.info(this.municipiosFiltrados);
   }
   add(nombre: string, descripcion: string,
-    codigoDane: number, codigoDanePrincipal: number, cantidadManipuladoras: number) {
+    codigoDane: number, codigoDanePrincipal: number, cantidadManipuladoras: number, longitud: number, latitud: number, indicaciones: string) {
     console.info(this.selectedMunicipio.Id);
     this.institucionService.create(
     nombre, descripcion, codigoDane, codigoDanePrincipal, this.selectedEtc.Id,
     this.selectedMunicipio.Id, cantidadManipuladoras,
-    this.selectedPrincipal, this.selectedTipoInstitucion.Id, this.selectedTipoMinuta.Id, this.selectedTipoModalidad.Id)
+    this.selectedPrincipal, this.selectedTipoInstitucion.Id, this.selectedTipoMinuta.Id, this.selectedTipoModalidad.Id,
+    longitud, latitud, indicaciones)
     .then(institucion => {
       console.info(institucion);
       this.selectedEtc = null;

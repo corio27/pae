@@ -72,6 +72,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
            },
            columns: {
              Id: {
+                 editor: false,
                title: 'ID',
                type: 'number',
              },

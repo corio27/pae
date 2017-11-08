@@ -19,7 +19,7 @@ export class TipoInstitucionService {
 }
 
 
-getInstitucion(id: number): Promise<TipoInstitucion> {
+getTipoInstitucion(id: number): Promise<TipoInstitucion> {
     const url = `${this.tipoInstitucionUrl}/${id}`;
     return this.http.get(url)
       .toPromise()

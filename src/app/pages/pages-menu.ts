@@ -39,15 +39,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/instituciones/smart-table',
       },
       {
-        title: 'Dashboard',
-        link: '/pages/instituciones/dashboard',
-      },
-      {
         title: 'Etc',
         link: '/pages/instituciones/etcs',
       },
+      {
+        title: 'Buscar',
+        link: '/pages/instituciones/resultados',
+      },
+      {
+        title: 'Despachos',
+        link: '/pages/instituciones/despachos',
+      },
     ],
-
   },
   {
     title: 'Alimentos',
@@ -82,7 +85,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/alimentos/unidades_medida',
       },
     ],
-
   },
   {
     title: 'Auth',

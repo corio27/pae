@@ -4,16 +4,18 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/toPromise';
 import { Institucion } from './institucion';
-
+import { Complemento } from './complemento';
+import { ComplementosInstitucion } from './complementosInstitucion';
 
 @Injectable()
 export class InstitucionService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private institucionesUrl = 'v1/institucion';
+  private complementosInstitucionUrl = 'v1/complemento_institucion';
   private objeto: string;
    constructor(private http: Http) { }
    getInstituciones(): Promise<Institucion[]> {
-  return this.http.get(this.institucionesUrl)
+  return this.http.get('v1/institucion/?limit=-1')
              .toPromise()
              .then(response => response.json() as Institucion[])
              .catch(this.handleError);
@@ -23,7 +25,7 @@ getInstitucion(id: number): Promise<Institucion> {
     const url = `${this.institucionesUrl}/${id}`;
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json().data as Institucion)
+      .then(response => response.json() as Institucion)
       .catch(this.handleError);
   }
   private handleError(error: any): Promise<any> {
@@ -37,7 +39,8 @@ getInstitucion(id: number): Promise<Institucion> {
   }
   create(nombre: string, descripcion: string,
     codigoDane: number, codigoDanePrincipal: number, etc: number, municipio: number, cantidadManipuladoras: number,
-    principal: number, tipoInstitucion: number, tipoMinuta: number, tipoModalidad: number): Promise<Institucion> {
+    principal: number, tipoInstitucion: number, tipoMinuta: number, tipoModalidad: number,
+    longitud: number, latidud: number, indicaciones: string): Promise<Institucion> {
     this.objeto =
     '{"CantidadManipuladoras":' + cantidadManipuladoras + ',' +
       '"CodigoDane":' + codigoDane + ',' +
@@ -49,7 +52,10 @@ getInstitucion(id: number): Promise<Institucion> {
       '"Nombre": "' + nombre + '",' +
       '"TipoInstitucionId":' + tipoInstitucion + ',' +
       '"TipoModalidad":' + tipoModalidad + ',' +
-      '"TipoMinuta":' + tipoMinuta + '}';
+      '"TipoMinuta":' + tipoMinuta + ',' +
+      '"Longitud":' + longitud + ',' +
+      '"Latitud":' + latidud + ',' +
+      '"Indicaciones":"' + indicaciones + '"}';
     console.info(this.objeto);
     return this.http
       .post(this.institucionesUrl, this.objeto, {headers: this.headers})
@@ -57,5 +63,13 @@ getInstitucion(id: number): Promise<Institucion> {
       .then(res => res.json() as Institucion)
       .catch(this.handleError);
   }
+  getComplementos( institucion: Institucion, complemento: Complemento ): Promise<ComplementosInstitucion[]> {
+      const url =
+      `${this.complementosInstitucionUrl}/?query=InstitucionId=${institucion.Id},ComplementoId=${complemento.Id}`;
+      return this.http.get(url)
+        .toPromise()
+        .then(response => response.json() as ComplementosInstitucion[])
+        .catch(this.handleError);
+    }
 
 }

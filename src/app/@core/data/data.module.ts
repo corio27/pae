@@ -21,6 +21,8 @@ import { ProveedorService } from './proveedor.service';
 import { MenuService } from './menu.service';
 import { UnidadMedidaService } from './unidadMedida.service';
 import { RolService } from './rol.service';
+import { ComplementoService } from './complemento.service';
+import { DespachoService } from './despacho.service';
 
 const SERVICES = [
   UserService,
@@ -44,6 +46,8 @@ const SERVICES = [
   MenuService,
   UnidadMedidaService,
   RolService,
+  ComplementoService,
+  DespachoService,
   ];
 
 @NgModule({

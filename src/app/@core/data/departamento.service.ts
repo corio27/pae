@@ -19,7 +19,7 @@ export class DepartamentoService {
 }
 
 
-getProducto(id: number): Promise<Departamento> {
+getDepartmento(id: number): Promise<Departamento> {
     const url = `${this.departamentoUrl}/${id}`;
     return this.http.get(url)
       .toPromise()

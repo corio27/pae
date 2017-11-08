@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NbSearchService } from '@nebular/theme'
+import { Institucion } from '../../../@core/data/institucion';
+import { InstitucionService } from '../../../@core/data/institucion.service';
 
 @Component({
   selector: 'ngx-resultados',
@@ -12,18 +14,44 @@ import { NbSearchService } from '@nebular/theme'
 })
 export class ResultadosComponent implements OnInit {
 
-  constructor(private searchService: NbSearchService ) {
+instituciones: Institucion[] = [];
+institucion: Institucion;
+tamano: number;
+term: string = '';
+filteredInstituciones: Institucion[] = [];
+  constructor(private searchService: NbSearchService, private institucionService: InstitucionService) {
   }
-  term: string = '';
+
+
   ngOnInit() {
-    this.searchService.onSearchSubmit().subscribe((data: {term: string, tag: string }) => {
-      console.info(`term: ${data.term}, from search: ${data.tag}`);
-    });
-   }
+    this.institucionService.getInstituciones().then(instituciones => this.instituciones = instituciones);
+    this.assignCopy();
+  }
+   assignCopy() {
+   this.filteredInstituciones = Object.assign([], this.instituciones);
+}
+filterItem(value) {
+   console.info(value);
+   if ( !value ) { this.assignCopy(); }
+   this.filteredInstituciones = Object.assign([], this.instituciones).filter(
+      institucion => institucion.Nombre.toLowerCase().indexOf(value.toLowerCase()) > -1 ,
+   )
+   console.info( this.filteredInstituciones );
+}
+
+tamanoString(value) {
+  return value.length - 1;
+}
    enBuscar(event) {
-        if ( event.data != null ) {
-         this.term += event.data;
-         this.searchService.submitSearch(this.term, 'prueba');
-       }
-   }
+      if ( event.data == null ) {
+        this.tamano = this.tamanoString( this.term ) ;
+         this.term = this.term.substring(0, this.tamano);
+         console.info( this.term );
+      } else {
+          this.term += event.data;
+      }
+
+      console.info(this.term);
+      this.filterItem(this.term);
+    }
 }

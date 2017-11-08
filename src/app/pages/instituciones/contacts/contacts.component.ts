@@ -1,11 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import { NbThemeService, NbMediaBreakpoint, NbMediaBreakpointsService } from '@nebular/theme';
 import { Persona } from '../../../@core/data/persona';
+import { Institucion } from '../../../@core/data/institucion';
 import { PersonaService } from '../../../@core/data/persona.service';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../../@core/data/users.service';
 @Component({
-  selector: 'ngx-contacts',
+  selector: 'ngx-contactos',
   styleUrls: ['./contacts.component.scss'],
   templateUrl: './contacts.component.html',
 })
@@ -18,6 +19,15 @@ export class ContactsComponent implements OnInit, OnDestroy {
   breakpoints: any;
   themeSubscription: any;
   currentTheme: string;
+
+  private _institucion: Institucion;
+
+   @Input()
+   set institucion(institucion: Institucion) {
+     this._institucion = institucion;
+   }
+
+   get institucion(): Institucion { return this._institucion; }
 
   constructor(private personaService: PersonaService,
               private userService: UserService,
@@ -37,6 +47,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
     //      this.personas = data as Persona[];
     //      console.info('*r4eb', this.personas);
     //   })
+    console.info('Institucionthis', this.institucion);
       this.userService.getUsers()
       .subscribe((users: any) => {
         this.contacts = [

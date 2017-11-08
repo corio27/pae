@@ -1,8 +1,22 @@
 <div class="row">
     <div class="col-xxxl-3 col-xxl-4 col-lg-5 col-md-6">
-    <ngx-kitten></ngx-kitten>
+    <ngx-kitten [institucion]="selectedInstitucion" [municipio]="municipio" [departamento]="departamento" [tipoInstitucion]="tipoInstitucion"></ngx-kitten>
   </div>
     <div class="col-xxxl-3 col-xxl-4 col-lg-7 col-md-6">
-    <ngx-contacts></ngx-contacts>
+    <ngx-contactos [institucion]="selectedInstitucion"></ngx-contactos>
   </div>
+  <div class="col-xxxl-3 col-xxl-4 col-lg-12 col-md-6">
+  <ngx-gmaps [institucion]="selectedInstitucion"></ngx-gmaps>
+</div>
+</div>
+
+<div class="complementos" *ngFor="let complemento of complementos">
+  <div class="col-lg-5">
+    <nb-card>
+      <nb-card-header>{{complemento.Nombre}}</nb-card-header>
+      <nb-card-body>
+        <ngx-echarts-pie [complemento]="complemento" [institucion]="selectedInstitucion"></ngx-echarts-pie>
+      </nb-card-body>
+    </nb-card>
+</div>
 </div>

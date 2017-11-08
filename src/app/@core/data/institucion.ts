@@ -6,8 +6,11 @@ export class Institucion {
     CodigoDanePrincipal: number;
     EsPrincipal: number;
     EtcId: any[];
-    MunicipioId: any[];
+    MunicipioId: number;
     Nombre: string;
-    TipoInstitucionId: any[];
+    TipoInstitucionId: number;
     TipoMinutaTipoModalidadId: any[];
+    Longitud: number;
+    Latitud: number;
+    Indicaciones: string;
   }

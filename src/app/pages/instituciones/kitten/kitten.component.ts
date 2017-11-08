@@ -1,17 +1,30 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, Input,  AfterViewInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
-
+import { Institucion } from '../../../@core/data/institucion';
+import { DepartamentoService } from '../../../@core/data/departamento.service';
+import { MunicipioService } from '../../../@core/data/municipio.service';
+import { Municipio } from '../../../@core/data/municipio';
+import { Departamento } from '../../../@core/data/departamento';
+import { TipoInstitucion } from '../../../@core/data/tipoInstitucion';
 @Component({
   selector: 'ngx-kitten',
   styleUrls: ['./kitten.component.scss'],
   templateUrl: './kitten.component.html',
 })
-export class KittenComponent implements OnDestroy {
+export class KittenComponent implements  OnDestroy, AfterViewInit {
 
-  currentTheme: string;
-  themeSubscription: any;
+     @Input() institucion: Institucion;
+     @Input() municipio: Municipio;
+     @Input() departamento: Departamento;
+     @Input() tipoInstitucion: TipoInstitucion;
+     currentTheme: string;
+     themeSubscription: any;
 
-  constructor(private themeService: NbThemeService) {
+
+  constructor(private municipioService: MunicipioService,
+    private departamentoService: DepartamentoService ,
+    private themeService: NbThemeService) {
+
     this.themeSubscription = this.themeService.getJsTheme().subscribe(theme => {
       this.currentTheme = theme.name;
     });
@@ -19,5 +32,10 @@ export class KittenComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.themeSubscription.unsubscribe();
+  }
+  ngAfterViewInit() {
+    console.info(this.institucion);
+    // this.municipioService.getMunicipio(this.institucion.MunicipioId).then(municipio => this.municipio = municipio);
+
   }
 }
