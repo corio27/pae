@@ -25,7 +25,7 @@ import {
   ThemeSwitcherComponent,
   TinyMCEComponent,
 } from './components';
-import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
+import { CapitalizePipe, SafePipe, RoundPipe, TimingPipe } from './pipes';
 import {
   OneColumnLayoutComponent,
   SampleLayoutComponent,
@@ -66,7 +66,7 @@ const COMPONENTS = [
 
 const PIPES = [
   CapitalizePipe,
-  PluralPipe,
+  SafePipe,
   RoundPipe,
   TimingPipe,
 ];

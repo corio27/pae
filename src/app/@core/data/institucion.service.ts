@@ -20,6 +20,12 @@ export class InstitucionService {
              .then(response => response.json() as Institucion[])
              .catch(this.handleError);
 }
+getInstitucionesUsuarios(): Promise<Institucion[]> {
+return this.http.get('v1/institucion/')
+          .toPromise()
+          .then(response => response.json() as Institucion[])
+          .catch(this.handleError);
+}
 
 getInstitucion(id: number): Promise<Institucion> {
     const url = `${this.institucionesUrl}/${id}`;

@@ -2,7 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbThemeService, NbMediaBreakpoint, NbMediaBreakpointsService } from '@nebular/theme';
 import { Despacho } from '../../../@core/data/despacho';
 import { DespachoService } from '../../../@core/data/despacho.service';
-
+import { ModalComponent } from './modal/modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'ngx-form-layouts',
@@ -16,7 +17,7 @@ export class DespachosComponent implements OnInit, OnDestroy {
   themeSubscription: any;
   currentTheme: string;
   despachos: Despacho[];
-  constructor( private despachoService: DespachoService,
+  constructor( private modalService: NgbModal, private despachoService: DespachoService,
     private breakpointService: NbMediaBreakpointsService,  private themeService: NbThemeService) {
                 this.breakpoints = breakpointService.getBreakpointsMap();
                 this.themeSubscription = themeService.onMediaQueryChange()
@@ -32,9 +33,12 @@ export class DespachosComponent implements OnInit, OnDestroy {
      this.themeSubscription.unsubscribe();
   }
   procesar( menuInicial: number, menuFinal: number ) {
-       this.despachoService.getDespachos(menuInicial, menuFinal).then(despachos => {
-         this.despachos = despachos;
-         this.despachos.forEach(despacho => {});
-     })
+    const activeModal = this.modalService.open(ModalComponent, { size: 'lg', container: 'nb-layout' });
+   activeModal.componentInstance.modalHeader = 'ETL';
+  }
+  verReporte() {
+    const activeModal = this.modalService.open(ModalComponent, { size: 'lg', container: 'nb-layout' });
+
+   activeModal.componentInstance.modalHeader = 'REPORTE';
   }
 }

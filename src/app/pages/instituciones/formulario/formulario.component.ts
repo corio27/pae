@@ -82,7 +82,8 @@ export class FormularioComponent implements OnInit, OnDestroy {
     console.info(this.municipiosFiltrados);
   }
   add(nombre: string, descripcion: string,
-    codigoDane: number, codigoDanePrincipal: number, cantidadManipuladoras: number, longitud: number, latitud: number, indicaciones: string) {
+    codigoDane: number, codigoDanePrincipal: number,
+    cantidadManipuladoras: number, longitud: number, latitud: number, indicaciones: string) {
     console.info(this.selectedMunicipio.Id);
     this.institucionService.create(
     nombre, descripcion, codigoDane, codigoDanePrincipal, this.selectedEtc.Id,

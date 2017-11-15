@@ -35,7 +35,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
     ngOnInit() {
       // TODO refactizar para utilizar el servicio
      //  this.personaService.getPersonas().then(personas => this.personas = personas);
-      this.institucionService.getInstituciones().then(instituciones => this.instituciones = instituciones);
+      this.institucionService.getInstitucionesUsuarios().then(instituciones => this.instituciones = instituciones);
       //  this.http.get('v1/persona').subscribe(data => {
       //    this.personas = data as Persona[];
       //    console.info('*r4eb', this.personas);

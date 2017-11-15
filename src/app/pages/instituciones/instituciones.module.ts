@@ -18,7 +18,7 @@ import { EchartsMultipleXaxisComponent } from './echarts/echarts-multiple-xaxis.
 import { EchartsAreaStackComponent } from './echarts/echarts-area-stack.component';
 import { EchartsBarAnimationComponent } from './echarts/echarts-bar-animation.component';
 import { EchartsRadarComponent } from './echarts/echarts-radar.component';
-
+import { ModalComponent } from './despachos/modal/modal.component';
 @NgModule({
   imports: [
     ThemeModule,
@@ -43,10 +43,13 @@ import { EchartsRadarComponent } from './echarts/echarts-radar.component';
       EchartsAreaStackComponent,
       EchartsBarAnimationComponent,
       EchartsRadarComponent,
-
+  ModalComponent,
   ],
   providers: [
     SmartTableService,
+  ],
+  entryComponents: [
+    ModalComponent,
   ],
 })
 export class InstitucionesModule { }
