@@ -38,7 +38,7 @@ export class DespachosComponent implements OnInit, OnDestroy {
   procesar( menuInicial: number, menuFinal: number ) {
     Sbi.sdk.services.setBaseUrl({
      protocol: 'http',
-     host: '10.48.78.17',
+     host: '200.91.218.188',
      port: '8080',
      contextPath: 'SpagoBI',
      controllerPath: 'servlet/AdapterHTTP',
