@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { AgmCoreModule } from '@agm/core';
 import { ThemeModule } from '../../@theme/theme.module';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarModule } from 'angular-calendar';
 import { InstitucionesRoutingModule, routedComponents } from './instituciones-routing.module';
 import { SmartTableService } from '../../@core/data/smart-table.service';
 import { ContactsComponent } from './contacts/contacts.component';
@@ -28,6 +30,8 @@ import { ModalComponent } from './despachos/modal/modal.component';
     AgmCoreModule.forRoot(),
     NgxChartsModule,
     ChartModule,
+    // BrowserAnimationsModule,
+    // CalendarModule.forRoot(),
   ],
 
   declarations: [
