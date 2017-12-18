@@ -1,17 +1,37 @@
-  <div class="col-md-6">
+  <div class="col-md-12">
+    <div class="col-md-6">
     <nb-card>
       <nb-card-header>Despachos</nb-card-header>
       <nb-card-body>
-            <div class="form-group">
-            <label>Menu Inicial</label>
-            <input #MenuInicial  class="form-control"/>
-            <label>Menu Final</label>
-            <input #MenuFinal   class="form-control"/>
+        <button (click)="procesar();" class="btn btn-primary">
+          Planeación
+        </button>
 
-            <button (click)="procesar(MenuInicial.value, MenuFinal.value);">
-              Procesar
-            </button>
-        </div>
+
       </nb-card-body>
+
     </nb-card>
+     </div>
+      <div class="col-md-6">
+    <nb-card>
+        <nb-card-header>Reportes</nb-card-header>
+      <nb-card-body>
+      <div class="form-group">
+    <button (click)="waybill();" class="btn btn-primary">
+      Reporte Waybill
+    </button>
+    </div>
+      <div class="form-group">
+    <button (click)="asistencias();" class="btn btn-primary">
+      Reporte Asistencias
+    </button>
+    </div>
+      <div class="form-group">
+    <button (click)="ajustes();" class="btn btn-primary">
+      Reporte Ajustes
+    </button>
+    </div>
+    </nb-card-body>
+    </nb-card>
+    </div>
   </div>

@@ -5,6 +5,16 @@ import { DespachoService } from '../../../@core/data/despacho.service';
 import { ModalComponent } from './modal/modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
+import { Departamento } from '../../../@core/data/departamento';
+import { DepartamentoService } from '../../../@core/data/departamento.service';
+import { Municipio } from '../../../@core/data/municipio';
+import { Institucion } from '../../../@core/data/institucion';
+import { MunicipioService } from '../../../@core/data/municipio.service';
+import { TipoMinuta } from '../../../@core/data/tipoMinuta';
+import { InstitucionService } from '../../../@core/data/institucion.service';
+import { TipoMinutaService } from '../../../@core/data/tipoMinuta.service';
+
+
 declare var Sbi: any;
 @Component({
   selector: 'ngx-form-layouts',
@@ -20,8 +30,27 @@ export class DespachosComponent implements OnInit, OnDestroy {
   themeSubscription: any;
   currentTheme: string;
   despachos: Despacho[];
-  constructor( private modalService: NgbModal, private despachoService: DespachoService, sanitizer: DomSanitizer,
-    private breakpointService: NbMediaBreakpointsService,  private themeService: NbThemeService) {
+  selectedDepartamento: Departamento;
+  municipios: Municipio[];
+  municipiosFiltrados: Municipio[];
+  departamentos: Departamento[];
+  selectedMunicipio: Municipio;
+  tipoMinuta: TipoMinuta;
+  tiposMinutas: TipoMinuta[];
+  selectedTipoMinuta: TipoMinuta;
+  instituciones: Institucion[];
+  selectedInstitucion: Institucion;
+  institucionesFiltradas: Institucion[];
+  constructor(
+    private institucionService: InstitucionService,
+    private departamentoService: DepartamentoService,
+    private municipioService: MunicipioService,
+    private tipoMinutaService: TipoMinutaService,
+    private modalService: NgbModal,
+    private despachoService: DespachoService,
+    sanitizer: DomSanitizer,
+    private breakpointService: NbMediaBreakpointsService,
+    private themeService: NbThemeService) {
                 this.breakpoints = breakpointService.getBreakpointsMap();
                 this.themeSubscription = themeService.onMediaQueryChange()
                   .subscribe(([oldValue, newValue]) => {
@@ -30,22 +59,26 @@ export class DespachosComponent implements OnInit, OnDestroy {
                     this.sanitizer = sanitizer;
     }
     ngOnInit() {
+      this.municipioService.getMunicipios().then(municipios => this.municipios = municipios);
+      this.departamentoService.getDepartamentos().then(departamentos => this.departamentos = departamentos);
+      this.tipoMinutaService.getTiposMinutas().then(tiposMinutas => this.tiposMinutas = tiposMinutas);
+      this.institucionService.getInstituciones().then(instituciones => this.instituciones = instituciones);
     }
 
   ngOnDestroy() {
      this.themeSubscription.unsubscribe();
   }
-  procesar( menuInicial: number, menuFinal: number ) {
+  procesar() {
     Sbi.sdk.services.setBaseUrl({
      protocol: 'http',
-     host: '200.91.218.188',
+     host: '10.48.78.17',
      port: '8080',
      contextPath: 'SpagoBI',
      controllerPath: 'servlet/AdapterHTTP',
     });
     const cb = function(result, args, success) {
     if ( success === true ) {
-       this.execTest1();
+       this.execTest1('pae_planeacion');
      } else {
        alert('ERROR: Wrong username or password');
      }
@@ -56,13 +89,76 @@ export class DespachosComponent implements OnInit, OnDestroy {
       },
     });
   }
-  verReporte() {
-
+  waybill() {
+    Sbi.sdk.services.setBaseUrl({
+     protocol: 'http',
+     host: '10.48.78.17',
+     port: '8080',
+     contextPath: 'SpagoBI',
+     controllerPath: 'servlet/AdapterHTTP',
+    });
+    const cb = function(result, args, success) {
+    if ( success === true ) {
+       this.execTest1('pae_waybill');
+     } else {
+       alert('ERROR: Wrong username or password');
+     }
+    };
+     Sbi.sdk.api.authenticate({params: {user: 'biconsulta', password: 'biconsulta'}, callback: {
+          fn: cb, scope: this,
+        // , args: {arg1: 'A', arg2: 'B', ...}
+      },
+    });
 
       }
-  execTest1() {
+      ajustes() {
+        Sbi.sdk.services.setBaseUrl({
+         protocol: 'http',
+         host: '10.48.78.17',
+         port: '8080',
+         contextPath: 'SpagoBI',
+         controllerPath: 'servlet/AdapterHTTP',
+        });
+        const cb = function(result, args, success) {
+        if ( success === true ) {
+           this.execTest1('pae_waybill');
+         } else {
+           alert('ERROR: Wrong username or password');
+         }
+        };
+         Sbi.sdk.api.authenticate({params: {user: 'biconsulta', password: 'biconsulta'}, callback: {
+              fn: cb, scope: this,
+            // , args: {arg1: 'A', arg2: 'B', ...}
+          },
+        });
+
+          }
+          asistencias() {
+            Sbi.sdk.services.setBaseUrl({
+             protocol: 'http',
+             host: '10.48.78.17',
+             port: '8080',
+             contextPath: 'SpagoBI',
+             controllerPath: 'servlet/AdapterHTTP',
+            });
+            const cb = function(result, args, success) {
+            if ( success === true ) {
+               this.execTest1('pae_asistencias');
+             } else {
+               alert('ERROR: Wrong username or password');
+             }
+            };
+             Sbi.sdk.api.authenticate({params: {user: 'biconsulta', password: 'biconsulta'}, callback: {
+                  fn: cb, scope: this,
+                // , args: {arg1: 'A', arg2: 'B', ...}
+              },
+            });
+
+              }
+
+  execTest1(reporte: string) {
         this.url = Sbi.sdk.api.getDocumentUrl({
-         documentLabel: 'pae_waybill'
+         documentLabel: reporte
          , executionRole: '/spagobi/biconsulta'
          , displayToolbar: true
          , displaySliders: true

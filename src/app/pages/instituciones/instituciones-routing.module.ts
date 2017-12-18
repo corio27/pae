@@ -8,6 +8,8 @@ import { EtcsComponent} from './etcs/etcs.component';
 import { ResultadosComponent} from './resultados/resultados.component';
 import { GmapsComponent} from './mapa/gmaps.component';
 import { DespachosComponent} from './despachos/despachos.component';
+import { EditarComponent} from './editar/editar.component';
+import { DevolucionesComponent} from './devoluciones/devoluciones.component';
 const routes: Routes = [{
   path: '',
   component: InstitucionesComponent,
@@ -24,12 +26,20 @@ const routes: Routes = [{
     component: EtcsComponent,
   },
   {
+    path: 'editar/:id',
+    component: EditarComponent,
+  },
+  {
     path: 'dashboard/:id',
     component: DashboardComponent,
   },
   {
     path: 'resultados',
     component: ResultadosComponent,
+  },
+  {
+    path: 'devoluciones',
+    component: DevolucionesComponent,
   },
   {
     path: 'mapa',
@@ -57,4 +67,6 @@ export const routedComponents = [
   ResultadosComponent,
   GmapsComponent,
   DespachosComponent,
+  EditarComponent,
+  DevolucionesComponent,
 ];

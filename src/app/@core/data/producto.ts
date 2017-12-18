@@ -1,6 +1,8 @@
+import { TipoAlimento } from './tipoAlimento';
 export class Producto {
   Id: number;
   Nombre: string;
   Codigo: number;
-  TipoAlimentoId: any[];
+  CodigoNutricional: number;
+  TipoAlimentoId: TipoAlimento;
 }

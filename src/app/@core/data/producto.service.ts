@@ -43,7 +43,7 @@ getProducto(id: number): Promise<Producto> {
 
   create(name: string, codigo: number, tipoAlimentoId: TipoAlimento): Promise<Producto> {
     this.objeto =
-    '{"Nombre":"' + name + '", "Codigo":' + codigo + ', "TipoAlimentoId":' + JSON.stringify(tipoAlimentoId) + '}';
+    '{"Nombre":"' + name + '", "Codigo":' + codigo + ', "TipoAlimentoId":' + tipoAlimentoId + '}';
     console.info(this.objeto);
     return this.http
       .post(this.productoUrl, this.objeto, {headers: this.headers})
@@ -52,12 +52,17 @@ getProducto(id: number): Promise<Producto> {
       .catch(this.handleError);
   }
 
-  update(producto: Producto): Promise<Producto> {
-    const url = `${this.productoUrl}/${producto.Id}`;
+  update(id: number, nombre: string,
+    codigo: number, codigoNutricional: number, tipoAlimentoId: number): Promise<Producto> {
+    this.objeto =
+    '{"Id":' + id + ', "Nombre":"' + nombre + '", "Codigo":' + codigo + ', "CodigoNutricional":'
+    + codigoNutricional + ', "TipoAlimentoId":{"Id":' + tipoAlimentoId + '}}';
+    console.info(this.objeto);
+    const url = `${this.productoUrl}/${id}`;
     return this.http
-      .put(url, JSON.stringify(producto), {headers: this.headers})
+      .put(url, this.objeto, {headers: this.headers})
       .toPromise()
-      .then(() => producto)
+      .then(res => res.json() as Producto)
       .catch(this.handleError);
   }
 

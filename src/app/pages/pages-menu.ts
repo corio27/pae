@@ -50,6 +50,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Despachos',
         link: '/pages/instituciones/despachos',
       },
+      {
+        title: 'Devoluciones',
+        link: '/pages/instituciones/devoluciones',
+      },
     ],
   },
   {

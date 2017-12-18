@@ -3,6 +3,7 @@ import { NbThemeService, NbMediaBreakpoint, NbMediaBreakpointsService } from '@n
 import { Producto } from '../../../@core/data/producto';
 import { TipoAlimento } from '../../../@core/data/tipoAlimento';
 import { Lista } from '../../../@core/data/lista';
+import { ProductoLista } from '../../../@core/data/productoLista';
 import { ProductoService } from '../../../@core/data/producto.service';
 import { TipoAlimentoService } from '../../../@core/data/tipoAlimento.service';
 import { HttpClient } from '@angular/common/http';
@@ -18,6 +19,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
 
   productos: Producto[] = [];
   producto: Producto;
+  productoLista: ProductoLista;
   contacts: any[];
   recent: any[];
   breakpoint: NbMediaBreakpoint;
@@ -25,6 +27,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
   themeSubscription: any;
   currentTheme: string;
   tiposAlimentos: TipoAlimento[] = [];
+  tipoAlimento: TipoAlimento[] = [];
   selectedProducto: Producto;
   selectedTipoAlimento: TipoAlimento;
   lista: Lista[] = [];
@@ -53,7 +56,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
                const nuevaLista = new Lista( tipoAlimento.Id , tipoAlimento.Nombre );
                this.lista.push(nuevaLista);
          });
-         console.info(this.tiposAlimentos);
+         console.info(this.lista);
          this.settings = {
            add: {
              addButtonContent: '<i class="nb-plus"></i>',
@@ -72,7 +75,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
            },
            columns: {
              Id: {
-                 editor: false,
+               editable: false,
                title: 'ID',
                type: 'number',
              },
@@ -82,13 +85,20 @@ export class ProductosComponent implements OnInit, OnDestroy {
              },
              Codigo: {
                title: 'Código',
-               type: 'string',
+               type: 'number',
+             },
+             CodigoNutricional: {
+               title: 'Código Nutricional',
+               type: 'number',
              },
              TipoAlimentoId: {
                title: 'Tipo Alimento',
-               valuePrepareFunction: (value) => {
-              const act = value as TipoAlimento;
-              return  act.Nombre ;
+               valuePrepareFunction: (cell , row) => {
+                 if ( cell === '' ) {
+                  return this.lista;
+                 } else {
+                  return row.TipoAlimentoId.Nombre;
+                  }
                 },
                 filter: false,
           editor: {
@@ -101,7 +111,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
            },
          };
       });
-        this.productoService.getProductos().then((producto) => {this.source.load(producto); console.info(producto); });
+        this.productoService.getProductos().then((producto) => {this.source.load(producto) });
      }
 
   ngOnDestroy() {
@@ -136,9 +146,13 @@ export class ProductosComponent implements OnInit, OnDestroy {
     }
     onSaveConfirm(event) {
      if (window.confirm('¿Seguro de salvar?')) {
-        this.producto = event.newData;
+       console.info(event.newData);
+        this.productoLista = event.newData;
         console.info(this.producto);
-        this.productoService.update(this.producto);
+        this.productoService.update(
+                this.productoLista.Id, this.productoLista.Nombre, this.productoLista.Codigo,
+                this.productoLista.CodigoNutricional,
+                parseInt(this.productoLista.TipoAlimentoId, 10));
         event.confirm.resolve(event.newData);
      } else {
        event.confirm.reject();

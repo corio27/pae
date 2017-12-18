@@ -13,7 +13,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
       <iframe id="execiframe" [attr.src]="url | safe" height="400px" width="100%"></iframe>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-md btn-primary" (click)="closeModal()">Save changes</button>
+      <button class="btn btn-md btn-primary" (click)="closeModal()">Cerrar</button>
     </div>
   `,
 })

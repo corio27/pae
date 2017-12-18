@@ -23,6 +23,7 @@ import { UnidadMedidaService } from './unidadMedida.service';
 import { RolService } from './rol.service';
 import { ComplementoService } from './complemento.service';
 import { DespachoService } from './despacho.service';
+import { WaybillService } from './waybill.service';
 
 const SERVICES = [
   UserService,
@@ -48,6 +49,7 @@ const SERVICES = [
   RolService,
   ComplementoService,
   DespachoService,
+  WaybillService,
   ];
 
 @NgModule({

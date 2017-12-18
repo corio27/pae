@@ -1,0 +1,58 @@
+  <div class="col-md-6">
+    <nb-card *ngIf="selectedInstitucion">
+      <nb-card-header>Institución</nb-card-header>
+      <nb-card-body>
+        
+            <div class="form-group">
+            <label>Nombre</label>
+            <input [(ngModel)]="selectedInstitucion.Nombre" #Nombre  class="form-control"/>
+            <label>Descripción</label>
+            <input [(ngModel)]="selectedInstitucion.Descripcion" #Descripcion   class="form-control"/>
+            <label>Código DANE</label>
+            <input #CodigoDane  [(ngModel)]="selectedInstitucion.CodigoDane" class="form-control"/>
+            <label>Código DANE principal</label>
+            <input #CodigoDanePrincipal   [(ngModel)]="selectedInstitucion.CodigoDanePrincipal" class="form-control"/>
+            <label>Principal</label>
+            <select [(ngModel)]="selectedPrincipal" class="form-control">
+              <option value="1">Si</option>
+              <option value="0">No</option>
+            </select>
+            <label>Tipo Institución</label>
+            <select [(ngModel)]="selectedTipoInstitucion" class="form-control">
+              <option *ngFor="let tipoInstitucion of tiposInstituciones" [ngValue]="tipoInstitucion">{{tipoInstitucion.Nombre}}</option>
+            </select>
+            <label>Cantidad Manipuladoras</label>
+            <input #CantidadManipuladoras [(ngModel)]="selectedInstitucion.CantidadManipuladoras" class="form-control"/>
+            <label>ETC</label>
+            <select [(ngModel)]="selectedEtc" class="form-control">
+              <option *ngFor="let etc of etcs" [ngValue]="etc">{{etc.Nombre}}</option>
+            </select>
+            <label>Departamento</label>
+            <select [(ngModel)]="selectedDepartamento" class="form-control" (change)="departamentoChanged()" >
+              <option *ngFor="let departamento of departamentos" [ngValue]="departamento">{{departamento.Nombre}}</option>
+            </select>
+            <label>Municipio</label>
+            <select [(ngModel)]="selectedMunicipio" class="form-control"  >
+              <option *ngFor="let municipio of municipiosFiltrados" [ngValue]="municipio">{{municipio.Nombre}}</option>
+            </select>
+            <label>Tipo Minuta</label>
+            <select [(ngModel)]="selectedTipoMinuta" class="form-control"  >
+              <option *ngFor="let tipoMinuta of tiposMinutas" [ngValue]="tipoMinuta">{{tipoMinuta.Nombre}}</option>
+            </select>
+            <label>Tipo Modalidad</label>
+            <select [(ngModel)]="selectedTipoModalidad" class="form-control"  >
+              <option *ngFor="let tipoModalidad of tiposModalidades" [ngValue]="tipoModalidad">{{tipoModalidad.Nombre}}</option>
+            </select>
+            <label>Longitud</label>
+            <input #Longitud [(ngModel)]="selectedInstitucion.Longitud" class="form-control"/>
+            <label>Latitud</label>
+            <input #Latitud [(ngModel)]="selectedInstitucion.Latitud" class="form-control"/>
+            <label>Indicaciones</label>
+            <textarea rows="5" #Indicaciones  [(ngModel)]="selectedInstitucion.Indicaciones" class="form-control"></textarea>
+            <button (click)="add(Nombre.value, Descripcion.value, CodigoDane.value, CodigoDanePrincipal.value, CantidadManipuladoras.value, Longitud.value, Latitud.value, Indicaciones.value); Nombre.value=''; CodigoDane.value=''">
+              Enviar
+            </button>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
