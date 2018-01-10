@@ -9,8 +9,8 @@ export class Institucion {
     MunicipioId: number;
     Nombre: string;
     TipoInstitucionId: number;
-    TipoMinutaId: number;
-    TipoModalidadId: number;
+    TipoMinuta: number;
+    TipoModalidad: number;
     Longitud: number;
     Latitud: number;
     Indicaciones: string;

@@ -13,13 +13,14 @@ import { PreparacionService } from '../../@core/data/preparacion.service';
 import {DndModule} from 'ng2-dnd';
 import { ImageUploadModule } from 'angular2-image-upload';
 
+
 @NgModule({
   imports: [
     ThemeModule,
     AlimentosRoutingModule,
     Ng2SmartTableModule,
     DndModule.forRoot(),
-      ImageUploadModule,
+
   ],
   declarations: [
     ...routedComponents,

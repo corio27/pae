@@ -1,4 +1,5 @@
-<nb-card>
+<div class="row">
+<nb-card class="col-xxxl-3 col-xxl-4 col-lg-5 col-md-6">
   <nb-card-header>
     Gestionar Proveedor
   </nb-card-header>
@@ -53,9 +54,44 @@
           <label>Valor</label>
             <input #Valor class="form-control" />
         </div>
-        <button (click)="addProducto();">
+        <label>Fecha Aplicacion</label>
+        <input #fecha class="form-control"/>
+        <button (click)="addProducto();" class="form-control">
           Añadir
         </button>
 
     </nb-card-footer>
 </nb-card>
+<div *ngIf="selectedProveedor">
+<nb-card>
+  <nb-card-header>
+    MUNICIPIOS DE {{selectedProveedor.Nombre}}
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="municipiosProveedor" *ngFor="let municipioProveedor of municipiosProveedor">
+      <nb-user  [name]="municipioProveedor.MunicipioId.Nombre"   size="large"></nb-user>
+
+
+    </div>
+
+  </nb-card-body>
+    <nb-card-footer>
+
+        <div class="form-group">
+          <label>Municipios</label>
+          <select [(ngModel)]="selectedMunicipio" class="form-control">
+            <option *ngFor="let m of municipios" [ngValue]="m">{{m.Nombre}}</option>
+          </select>
+        </div>
+        <button (click)="addMunicipio();" class="form-control">
+          Añadir
+        </button>
+
+    </nb-card-footer>
+</nb-card>
+
+</div>
+
+
+</div>

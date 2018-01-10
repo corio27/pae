@@ -71,7 +71,7 @@ export class DespachosComponent implements OnInit, OnDestroy {
   procesar() {
     Sbi.sdk.services.setBaseUrl({
      protocol: 'http',
-     host: '10.48.78.17',
+     host: 'localhost',
      port: '8080',
      contextPath: 'SpagoBI',
      controllerPath: 'servlet/AdapterHTTP',
@@ -92,7 +92,7 @@ export class DespachosComponent implements OnInit, OnDestroy {
   waybill() {
     Sbi.sdk.services.setBaseUrl({
      protocol: 'http',
-     host: '10.48.78.17',
+     host: 'localhost',
      port: '8080',
      contextPath: 'SpagoBI',
      controllerPath: 'servlet/AdapterHTTP',
@@ -114,7 +114,7 @@ export class DespachosComponent implements OnInit, OnDestroy {
       ajustes() {
         Sbi.sdk.services.setBaseUrl({
          protocol: 'http',
-         host: '10.48.78.17',
+         host: 'localhost',
          port: '8080',
          contextPath: 'SpagoBI',
          controllerPath: 'servlet/AdapterHTTP',
@@ -136,7 +136,7 @@ export class DespachosComponent implements OnInit, OnDestroy {
           asistencias() {
             Sbi.sdk.services.setBaseUrl({
              protocol: 'http',
-             host: '10.48.78.17',
+             host: 'localhost',
              port: '8080',
              contextPath: 'SpagoBI',
              controllerPath: 'servlet/AdapterHTTP',

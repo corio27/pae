@@ -25,6 +25,11 @@ export class DevolucionesComponent  {
       cancelButtonContent: '<i class="nb-close"></i>',
     },
   columns: {
+    Id: {
+      title: 'id',
+      type: 'string',
+      editable: false,
+    },
       Anio: {
         title: 'Año',
         type: 'number',

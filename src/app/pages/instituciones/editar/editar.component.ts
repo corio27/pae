@@ -86,9 +86,10 @@ export class EditarComponent implements OnInit {
 
              console.info(institucion);
              this.selectedPrincipal = institucion.EsPrincipal;
-             console.info('unomas' , institucion.TipoMinutaId);
-             this.tipoMinutaService.getTipoMinuta(institucion.TipoMinutaId)
-             .then(tipoMinuta => this.selectedTipoMinuta = tipoMinuta);
+             console.info('unomas' , institucion.TipoMinuta);
+             this.tipoMinutaService.getTipoMinuta(institucion.TipoMinuta)
+             .then(tipoMinuta => { this.selectedTipoMinuta = tipoMinuta;
+                            });
              this.municipioService.getMunicipio(this.selectedInstitucion.MunicipioId).then(
               municipio => {
               this.selectedMunicipio = municipio;
@@ -106,6 +107,9 @@ export class EditarComponent implements OnInit {
            });
 
          });
+         console.info(this.tiposMinutas);
+
+
   }
 
   departamentoChanged() {
