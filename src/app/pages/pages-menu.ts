@@ -52,7 +52,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'Devoluciones',
-        link: '/pages/instituciones/devoluciones',
+        link: '/pages/instituciones/bway',
       },
     ],
   },

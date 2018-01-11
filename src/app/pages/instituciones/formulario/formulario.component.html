@@ -48,11 +48,7 @@
             <input #Latitud class="form-control"/>
             <label>Indicaciones</label>
             <textarea rows="5" #Indicaciones  class="form-control"></textarea>
-            <label for="singleSelect"> Estado: </label><br>
-    <select name="singleSelect" ng-model="data.singleSelect" class="form-control">
-      <option value="ACTIVO">ACTIVO</option>
-      <option value="INACTIVO">INACTIVO</option>
-    </select><br>
+            
 
             <button (click)="add(Nombre.value, Descripcion.value, CodigoDane.value, CodigoDanePrincipal.value, CantidadManipuladoras.value, Longitud.value, Latitud.value, Indicaciones.value); Nombre.value=''; CodigoDane.value=''">
               Enviar

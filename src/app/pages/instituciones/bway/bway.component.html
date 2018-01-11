@@ -1,0 +1,12 @@
+
+  <ngx-search-input placeholder="Buscar Waybill...." (search)="enBuscar($event)" tag="prueba"></ngx-search-input>
+  <div >
+    <ul class="search-result">
+      <li *ngFor="let item of filteredPlanes" >
+        <a routerLink="/pages/instituciones/devoluciones/{{item.Uid}}">
+          {{item.Uid}}
+        </a>
+      </li>
+
+    </ul>
+</div>

@@ -2,7 +2,7 @@
     <nb-card *ngIf="selectedInstitucion">
       <nb-card-header>Institución</nb-card-header>
       <nb-card-body>
-        
+
             <div class="form-group">
             <label>Nombre</label>
             <input [(ngModel)]="selectedInstitucion.Nombre" #Nombre  class="form-control"/>
@@ -49,7 +49,48 @@
             <input #Latitud [(ngModel)]="selectedInstitucion.Latitud" class="form-control"/>
             <label>Indicaciones</label>
             <textarea rows="5" #Indicaciones  [(ngModel)]="selectedInstitucion.Indicaciones" class="form-control"></textarea>
+            <label for="singleSelect"> Estado: </label>
+    <select name="singleSelect" ng-model="data.singleSelect" class="form-control">
+      <option value="ACTIVO">ACTIVO</option>
+      <option value="INACTIVO">INACTIVO</option>
+    </select>
+    <label for="singleSelect"> Motivo: </label>
+    <textarea rows="5" #Motivo  [(ngModel)]="selectedInstitucion.Motivo" class="form-control"></textarea>
             <button (click)="add(Nombre.value, Descripcion.value, CodigoDane.value, CodigoDanePrincipal.value, CantidadManipuladoras.value, Longitud.value, Latitud.value, Indicaciones.value); Nombre.value=''; CodigoDane.value=''">
+              Enviar
+            </button>
+        </div>
+      </nb-card-body>
+    </nb-card>
+    </div>
+      <div class="col-md-6">
+    <nb-card *ngIf="selectedInstitucion">
+      <nb-card-header>Cupos</nb-card-header>
+      <nb-card-body>
+
+            <div class="form-group">
+            <label>Complemento AM 4-6</label>
+            <input  #complementoam4  class="form-control"/>
+            <label>Complemento AM 7-12</label>
+            <input  #complementoam7  class="form-control"/>
+            <label>Complemento AM 13-17</label>
+            <input  #complementoam13  class="form-control"/>
+            <label>Complemento PM 4-6</label>
+            <input  #complementopm4  class="form-control"/>
+            <label>Complemento PM 7-12</label>
+            <input  #complementopm7  class="form-control"/>
+            <label>Complemento PM 13-17</label>
+            <input  #complementopm13  class="form-control"/>
+            <label>Almuerzo 4-6</label>
+            <input  #almuerzo4  class="form-control"/>
+            <label>Almuerzo 7-12</label>
+            <input  #almuerzo7  class="form-control"/>
+            <label>Almuerzo 13-17</label>
+            <input  #almuerzo13  class="form-control"/>
+            <label for="singleSelect"> Motivo: </label>
+            <textarea rows="5" #Motivo  [(ngModel)]="selectedInstitucion.Motivo" class="form-control"></textarea>
+
+            <button>
               Enviar
             </button>
         </div>

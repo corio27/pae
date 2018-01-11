@@ -9,14 +9,3 @@
   <ngx-gmaps [institucion]="selectedInstitucion"></ngx-gmaps>
 </div>
 </div>
-
-<div class="complementos" *ngFor="let complemento of complementos">
-  <div class="col-lg-5">
-    <nb-card>
-      <nb-card-header>{{complemento.Nombre}}</nb-card-header>
-      <nb-card-body>
-        <ngx-echarts-pie [complemento]="complemento" [institucion]="selectedInstitucion"></ngx-echarts-pie>
-      </nb-card-body>
-    </nb-card>
-</div>
-</div>

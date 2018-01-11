@@ -9,6 +9,7 @@ import { InstitucionService } from './institucion.service';
 import { PersonaService } from './persona.service';
 import { ProductoService } from './producto.service';
 import { ComponenteService } from './componente.service';
+import { PlanService } from './plan.service';
 import { PreparacionService } from './preparacion.service';
 import { TipoAlimentoService } from './tipoAlimento.service';
 import { DepartamentoService } from './departamento.service';
@@ -50,6 +51,7 @@ const SERVICES = [
   ComplementoService,
   DespachoService,
   WaybillService,
+  PlanService,
   ];
 
 @NgModule({

@@ -81,6 +81,7 @@ export class MenusComponent implements OnInit, OnDestroy {
       this.menuService.getPreparacionesComponente(componenteMenu.Id)
       .then(preparacionesComponente => this.preparacionesComponente = preparacionesComponente);
         this.getPreparaciones();
+        console.info(this.preparacionesComponente);
     }
     getComponentes() {
       this.componenteService.getComponentes()

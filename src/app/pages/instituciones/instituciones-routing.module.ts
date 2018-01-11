@@ -10,6 +10,7 @@ import { GmapsComponent} from './mapa/gmaps.component';
 import { DespachosComponent} from './despachos/despachos.component';
 import { EditarComponent} from './editar/editar.component';
 import { DevolucionesComponent} from './devoluciones/devoluciones.component';
+import { BwayComponent} from './bway/bway.component';
 const routes: Routes = [{
   path: '',
   component: InstitucionesComponent,
@@ -38,7 +39,11 @@ const routes: Routes = [{
     component: ResultadosComponent,
   },
   {
-    path: 'devoluciones',
+    path: 'bway',
+    component: BwayComponent,
+  },
+  {
+    path: 'devoluciones/:uid',
     component: DevolucionesComponent,
   },
   {
@@ -69,4 +74,5 @@ export const routedComponents = [
   DespachosComponent,
   EditarComponent,
   DevolucionesComponent,
+  BwayComponent,
 ];
