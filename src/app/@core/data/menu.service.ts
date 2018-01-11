@@ -14,10 +14,10 @@ import { PreparacionesComponente } from './preparacionesComponente';
 export class MenuService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private menuUrl = 'v1/menu';
-  private componentesMenuUrlQuery = '/v1/componentes_menu/?query=MenuId';
-  private componentesMenuUrl= '/v1/componentes_menu';
-  private prepracionesComponenteUrl= '/v1/preparaciones_componente';
-  private preparacionescomponenteUrlQuery = '/v1/preparaciones_componente/?query=ComponentesMenuId';
+  private componentesMenuUrlQuery = 'v1/componentes_menu/?query=MenuId';
+  private componentesMenuUrl= 'v1/componentes_menu';
+  private prepracionesComponenteUrl= 'v1/preparaciones_componente';
+  private preparacionescomponenteUrlQuery = 'v1/preparaciones_componente/?query=ComponentesMenuId';
  constructor(private http: Http) { }
  objeto: string;
  body: any;
