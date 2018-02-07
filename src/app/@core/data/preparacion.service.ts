@@ -12,7 +12,7 @@ export class PreparacionService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private preparacionUrl = 'v1/preparacion';
   private productosPreparacionUrlQuery = 'v1/productos_preparacion/?query=PreparacionId';
-  private productosPreparacionUrl= 'v1/productos_preparacion';
+  private productosPreparacionUrl= 'v1/productos_preparacion/?limit=-1';
  constructor(private http: Http) { }
  objeto: string;
  body: any;

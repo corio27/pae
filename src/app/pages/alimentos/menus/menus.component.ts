@@ -5,6 +5,8 @@ import { ComponentesMenu } from '../../../@core/data/componentesMenu';
 import { Preparacion } from '../../../@core/data/preparacion';
 import { PreparacionesComponente } from '../../../@core/data/preparacionesComponente';
 import { MenuService } from '../../../@core/data/menu.service';
+import { TipoMinuta} from '../../../@core/data/tipoMinuta';
+import { TipoMinutaService } from '../../../@core/data/tipoMinuta.service';
 import { ComponenteService } from '../../../@core/data/componente.service';
 import { PreparacionService } from '../../../@core/data/preparacion.service';
 
@@ -15,9 +17,10 @@ import { PreparacionService } from '../../../@core/data/preparacion.service';
   templateUrl: './menus.component.html',
 })
 export class MenusComponent implements OnInit, OnDestroy {
-
+  tiposMinutas: TipoMinuta[] = [];
   menus: Menu[] = [];
   componentes: Componente[] = [];
+  selectedTipoMinuta: TipoMinuta;
   selectedMenu: Menu;
   selectedPreparacion: Preparacion;
   preparaciones: Preparacion[] = [];
@@ -26,12 +29,14 @@ export class MenusComponent implements OnInit, OnDestroy {
   selectedComponente: Componente;
   selectedComponenteMenu: ComponentesMenu;
   constructor(private menuService: MenuService,
-    private componenteService: ComponenteService, private preparacionService: PreparacionService) { }
+    private componenteService: ComponenteService,
+    private preparacionService: PreparacionService,
+  private tipoMinutaService: TipoMinutaService) { }
 
     ngOnInit() {
-        this.menuService.getMenus()
-        .then(menus => this.menus = menus);
-        this.getComponentes();
+       this.menuService.getMenus()
+       .then(menus => this.menus = menus);
+        // this.getComponentes();
   }
   ngOnDestroy() { }
   add(name: string): void {
@@ -41,20 +46,8 @@ export class MenusComponent implements OnInit, OnDestroy {
       this.menuService.create(name)
         .then(menu => {
           this.menus.push(menu);
-            console.info(menu);
-            this.componentes.forEach(componente => {
-              this.menuService.addComponente(menu, componente)
-              .then(componenteMenu => {
-                console.info(menu);
-                console.info(componente);
-                  //          this.componentesMenu.push(componenteMenu);
-            });
-            this.selectedMenu = null;
           });
-        });
-
-
-    }
+            }
 
     delete(menu: Menu): void {
       this.menuService
@@ -64,6 +57,10 @@ export class MenusComponent implements OnInit, OnDestroy {
             if (this.selectedMenu === menu) { this.selectedMenu = null; }
           });
     }
+    onSelectMinuta(minuta: TipoMinuta): void {
+      this.selectedTipoMinuta = minuta;
+      this.getComponentesMenu(this.selectedMenu);
+    }
     onSelect(menu: Menu): void {
       this.selectedMenu = menu;
       this.getComponentesMenu(this.selectedMenu);
@@ -71,6 +68,11 @@ export class MenusComponent implements OnInit, OnDestroy {
     onSelectComponenteMenu(componenteMenu: ComponentesMenu): void {
       this.selectedComponenteMenu = componenteMenu;
       this.getPreparacionesComponente(this.selectedComponenteMenu);
+    }
+    getMinutasMenu(minuta: TipoMinuta): void {
+      this.menuService.getComponentesMenu(minuta.Id)
+      .then(componentesMenu => this.componentesMenu = componentesMenu);
+
     }
     getComponentesMenu(menu: Menu): void {
       this.menuService.getComponentesMenu(menu.Id)

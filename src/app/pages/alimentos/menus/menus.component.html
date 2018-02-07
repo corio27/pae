@@ -1,79 +1,22 @@
 <nb-card>
   <nb-card-header>
-    Gestionar Menu
+    Menus
   </nb-card-header>
 
   <nb-card-body>
-    <div class="menus" *ngFor="let menu of menus" (click)="onSelect(menu)">
-      <nb-user  [name]="menu.Nombre"  [title]="nb-trash" size="large">
+    <div class="componentesMenu" *ngFor="let menu of menus">
+      <nb-user  [name]="menu.Nombre"   size="large"></nb-user>
 
-      </nb-user>
-      <i class="nb-trash" size="middle"
-      (click)="delete(menu); $event.stopPropagation()"></i>
+
     </div>
-    </nb-card-body>
+
+  </nb-card-body>
     <nb-card-footer>
       <div class="input-group">
-        <input #NombreMenu />
-        <button (click)="add(NombreMenu.value); NombreMenu.value=''">
+        <input #Nombre />
+        <button (click)="add(Nombre.value); Nombre.value=''">
           Añadir
         </button>
       </div>
-    </nb-card-footer>
-</nb-card>
-<div *ngIf="selectedMenu">
-<nb-card>
-  <nb-card-header>
-    Componentes de {{selectedMenu.Nombre}}
-  </nb-card-header>
-
-  <nb-card-body>
-    <div class="componentesMenu" *ngFor="let componenteMenu of componentesMenu" (click)="onSelectComponenteMenu(componenteMenu)">
-      <nb-user  [name]="componenteMenu.ComponenteId.Nombre"   size="large"></nb-user>
-
-
-    </div>
-
-  </nb-card-body>
-    <nb-card-footer>
-
-        <div class="form-group">
-          <label>Componente</label>
-          <select [(ngModel)]="selectedComponente">
-            <option *ngFor="let p of componentes" [ngValue]="p">{{p.Nombre}}</option>
-          </select>
-        </div>
-        <button (click)="addComponente();">
-          Añadir
-        </button>
-
-    </nb-card-footer>
-</nb-card>
-<div *ngIf="selectedComponenteMenu">
-<nb-card>
-  <nb-card-header>
-    Preparaciones de {{selectedComponenteMenu.MenuId.Nombre}}-{{selectedComponenteMenu.ComponenteId.Nombre}}
-  </nb-card-header>
-
-  <nb-card-body>
-    <div class="componentesPreparacion" *ngFor="let preparacionComponente of preparaciones">
-      <nb-user  [name]="preparacionComponente.Nombre"   size="large"></nb-user>
-
-
-    </div>
-
-  </nb-card-body>
-    <nb-card-footer>
-
-        <div class="form-group">
-          <label>Preparación</label>
-          <select [(ngModel)]="selectedPreparacion">
-            <option *ngFor="let p of preparaciones" [ngValue]="p">{{p.Nombre}}</option>
-          </select>
-        </div>
-        <button (click)="addPreparacion();">
-          Añadir
-        </button>
-
     </nb-card-footer>
 </nb-card>

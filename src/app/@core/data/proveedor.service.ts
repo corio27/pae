@@ -3,9 +3,11 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/toPromise';
 import { Proveedor } from './proveedor';
+import { Elemento } from './elemento';
 import { Producto } from './producto';
 import { ProductosProveedor } from './productosProveedor';
 import { Municipio } from './municipio';
+import { UnidadMedida } from './unidadMedida';
 import { MunicipiosProveedor } from './municipiosProveedor';
 
 
@@ -16,6 +18,7 @@ export class ProveedorService {
   private proveedorUrl = 'v1/proveedor';
   private productosProveedorUrlQuery = 'v1/productos_proveedor/?query=ProveedorId';
   private municipiosProveedorUrlQuery = 'v1/municipios_proveedor/?query=ProveedorId';
+private elementosProveedorUrl= 'v1/elementos_proveedor';
   private productosProveedorUrl= 'v1/productos_proveedor';
   private municipiosProveedorUrl= 'v1/municipios_proveedor';
   private objeto: string;
@@ -66,11 +69,39 @@ getProveedor(id: number): Promise<Proveedor> {
       .then(() => proveedor)
       .catch(this.handleError);
   }
-  add(proveedorId: Proveedor, productoId: Producto ): Promise<ProductosProveedor> {
+  add(proveedorId: Proveedor, productoId: Producto, unidadMedidaId: UnidadMedida,
+  valor: number,
+  fechaAplicacion: string ): Promise<ProductosProveedor> {
        this.objeto = '{"Id": null, "proveedorId":'
-      + JSON.stringify(proveedorId) + ', "productoId":' + JSON.stringify(productoId) + '}';
+      + JSON.stringify(proveedorId) + ', "productoId":' + JSON.stringify(productoId)
+      + ', "unidadMedidaId":' + JSON.stringify(unidadMedidaId)
+      + ', "valor":' + valor + ', "fechaAplicacion":' + fechaAplicacion
+      + ', "estado":"ACTIVO"}';
     return this.http
       .post(this.productosProveedorUrl, this.objeto, {headers: this.headers})
+      .toPromise()
+      .then(res => res.json() as ProductosProveedor)
+      .catch(this.handleError);
+  }
+  addElemento(proveedorId: Proveedor, productoId: Elemento, unidadMedidaId: UnidadMedida,
+  valor: number,
+  fechaAplicacion: string ): Promise<ProductosProveedor> {
+       this.objeto = '{"Id": null, "proveedorId":'
+      + JSON.stringify(proveedorId) + ', "elementoId":' + JSON.stringify(productoId)
+      + ', "unidadMedidaId":' + JSON.stringify(unidadMedidaId)
+      + ', "valor":' + valor + ', "fechaAplicacion":' + fechaAplicacion
+      + ', "estado":"ACTIVO"}';
+    return this.http
+      .post(this.elementosProveedorUrl, this.objeto, {headers: this.headers})
+      .toPromise()
+      .then(res => res.json() as ProductosProveedor)
+      .catch(this.handleError);
+  }
+  inactivar(id: number): Promise<ProductosProveedor> {
+       this.objeto = '{"Id":' + id
+      + ', "Estado":"INACTIVO"}';
+    return this.http
+      .put(this.productosProveedorUrlQuery, this.objeto, {headers: this.headers})
       .toPromise()
       .then(res => res.json() as ProductosProveedor)
       .catch(this.handleError);
@@ -82,6 +113,13 @@ getProveedor(id: number): Promise<Proveedor> {
        .then(response => response.json() as ProductosProveedor[])
        .catch(this.handleError);
    }
+   buscarId(id: number): Promise<ProductosProveedor[]> {
+      const url = `${this.productosProveedorUrlQuery}:${id}&limit=-1`;
+      return this.http.get(url)
+        .toPromise()
+        .then(response => response.json() as ProductosProveedor)
+          .catch(this.handleError);
+      }
    addMunicipio(proveedorId: Proveedor, municipioId: Municipio ): Promise<MunicipiosProveedor> {
         this.objeto = '{"Id": null, "proveedorId":'
        + JSON.stringify(proveedorId) + ', "municipioId":' + JSON.stringify(municipioId) + '}';

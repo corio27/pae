@@ -48,9 +48,9 @@
             <input #Latitud class="form-control"/>
             <label>Indicaciones</label>
             <textarea rows="5" #Indicaciones  class="form-control"></textarea>
-            
 
-            <button (click)="add(Nombre.value, Descripcion.value, CodigoDane.value, CodigoDanePrincipal.value, CantidadManipuladoras.value, Longitud.value, Latitud.value, Indicaciones.value); Nombre.value=''; CodigoDane.value=''">
+
+            <button class="btn btn-info"  (click)="add(Nombre.value, Descripcion.value, CodigoDane.value, CodigoDanePrincipal.value, CantidadManipuladoras.value, Longitud.value, Latitud.value, Indicaciones.value); ">
               Enviar
             </button>
         </div>

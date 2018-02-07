@@ -22,7 +22,7 @@ const routes: Routes = [{
     path: 'alimentos',
     loadChildren: './alimentos/alimentos.module#AlimentosModule',
   },
-   {
+  {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',

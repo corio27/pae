@@ -34,7 +34,7 @@ export class UnidadesMedidaComponent implements OnInit, OnDestroy {
 ngOnDestroy() {
    this.themeSubscription.unsubscribe();
 }
-add(name: string): void {
+add( name: string, peso: string ): void {
     name = name.trim();
     if (!name) { return; }
     console.info('nombre', name);

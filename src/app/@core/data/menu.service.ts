@@ -8,13 +8,11 @@ import { ComponentesMenu } from './componentesMenu';
 import { Preparacion } from './preparacion';
 import { PreparacionesComponente } from './preparacionesComponente';
 
-
-
 @Injectable()
 export class MenuService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private menuUrl = 'v1/menu';
-  private componentesMenuUrlQuery = 'v1/componentes_menu/?query=MenuId';
+  private componentesMenuUrlQuery = 'v1/componentes_menu_temp/?query=MenuId';
   private componentesMenuUrl= 'v1/componentes_menu';
   private prepracionesComponenteUrl= 'v1/preparaciones_componente';
   private preparacionescomponenteUrlQuery = 'v1/preparaciones_componente/?query=ComponentesMenuId';
@@ -22,7 +20,7 @@ export class MenuService {
  objeto: string;
  body: any;
  getMenus(): Promise<Menu[]> {
-   return this.http.get('v1/menu')
+   return this.http.get('v1/menu/?limit=-1')
    .toPromise()
    .then(response  => response.json() as Menu[])
    .catch(this.handleError);
@@ -84,7 +82,7 @@ getMenu(id: number): Promise<Menu> {
       this.objeto = '{"Id": null, "menuId":'
      + JSON.stringify(menuId) + ', "componenteId":' + JSON.stringify(componenteId) + '}';
    return this.http
-     .post(this.componentesMenuUrl, this.objeto, {headers: this.headers})
+     .post('v1/componentes_menu_temp', this.objeto, {headers: this.headers})
      .toPromise()
      .then(res => res.json() as ComponentesMenu)
      .catch(this.handleError);

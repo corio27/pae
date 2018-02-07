@@ -9,6 +9,8 @@ import { TipoMinuta } from './tipoMinuta';
 export class TipoMinutaService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private tipoMinutaUrl = 'v1/tipo_minuta';
+  'v1/productos_preparacion/?query=PreparacionId'
+  private menuMinutaUrl = 'v1/componentes_menu/?query=MinutaId';
  constructor(private http: Http) { }
 
   getTiposMinutas(): Promise<TipoMinuta[]> {
@@ -17,16 +19,23 @@ export class TipoMinutaService {
   .then(response  => response.json() as TipoMinuta[])
   .catch(this.handleError);
 }
-
-
-getTipoMinuta(id: number): Promise<TipoMinuta> {
-    const url = `${this.tipoMinutaUrl}/${id}`;
+getMenuMinuta(id: number): Promise<TipoMinuta> {
+    const url = `${this.menuMinutaUrl}:${id}`;
     return this.http.get(url)
       .toPromise()
       .then(response => response.json() as TipoMinuta)
       .catch(this.handleError);
   }
 
+
+
+getTipoMinuta(id: number): Promise<TipoMinuta> {
+  const url = `${this.tipoMinutaUrl}/${id}`;
+  return this.http.get(url)
+  .toPromise()
+  .then(response => response.json() as TipoMinuta)
+  .catch(this.handleError);
+}
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);

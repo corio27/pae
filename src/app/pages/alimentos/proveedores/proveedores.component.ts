@@ -18,14 +18,14 @@ import { MunicipioService } from '../../../@core/data/municipio.service';
 })
 export class ProveedoresComponent implements OnInit, OnDestroy {
 
-  proveedores: Proveedor[];
-  productos: Producto[];
-  municipios: Municipio[];
+  proveedores: Proveedor[] = [];
+  productos: Producto[] = [];
+  municipios: Municipio[] = [];
   selectedProveedor: Proveedor;
   selectedMunicipio: Municipio;
-  productosProveedor: ProductosProveedor[];
-  municipiosProveedor: MunicipiosProveedor[];
-  unidadMedidas: UnidadMedida[];
+  productosProveedor: ProductosProveedor[] = [];
+  municipiosProveedor: MunicipiosProveedor[] = [];
+  unidadMedidas: UnidadMedida[] = [];
   selectedValue: Producto;
   selectedUnidadMedida: UnidadMedida;
   constructor(private proveedorService: ProveedorService, private productoService: ProductoService,
@@ -77,8 +77,8 @@ export class ProveedoresComponent implements OnInit, OnDestroy {
       this.unidadMedidaService.getUnidadesMedida()
       .then(unidadMedidas => this.unidadMedidas = unidadMedidas);
     }
-    addProducto(): void {
-        this.proveedorService.add(this.selectedProveedor, this.selectedValue)
+    addProducto(valor: number, fecha: string): void {
+        this.proveedorService.add(this.selectedProveedor, this.selectedValue, this.selectedUnidadMedida, valor, fecha )
           .then(productosProveedor => {
                         this.productosProveedor.push(productosProveedor);
         });

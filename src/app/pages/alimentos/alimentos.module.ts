@@ -3,6 +3,7 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { AlimentosRoutingModule, routedComponents } from './alimentos-routing.module';
 import { ProductosComponent } from './productos/productos.component';
+import { MinutaComponent } from './minuta/minuta.component';
 import { PreparacionesComponent } from './preparaciones/preparaciones.component';
 import { MenusComponent } from './menus/menus.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
@@ -30,6 +31,7 @@ import { ImageUploadModule } from 'angular2-image-upload';
       ProveedoresComponent,
       ComponentesComponent,
       TiposAlimentosComponent,
+      MinutaComponent,
     ],
   providers: [
   ],

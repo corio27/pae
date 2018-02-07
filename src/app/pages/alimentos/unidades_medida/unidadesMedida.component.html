@@ -6,7 +6,7 @@
 
   <nb-card-body>
     <div class="unidadMedidas" *ngFor="let unidadMedida of unidadMedidas" (click)="onSelect(unidadMedida)">
-      <nb-user  [name]="unidadMedida.Nombre"   size="large"></nb-user>
+      <nb-user  [name]="unidadMedida.Nombre"   size="large" [title]="unidadMedida.Peso"></nb-user>
       <button class="delete"
       (click)="delete(unidadMedida); $event.stopPropagation()">Eliminar</button>
 
@@ -26,7 +26,7 @@
       <div class="input-group">
         <input #Peso class="form-control" />
       </div>
-        <button class="btn btn-primary" (click)="add(Nombre.value); Nombre.value=''">
+        <button class="btn btn-primary" (click)="add(Nombre.value, Peso.value); Nombre.value=''; Peso.value=''">
           Añadir
         </button>
 

@@ -87,10 +87,6 @@ export class ProductosComponent implements OnInit, OnDestroy {
                title: 'Código',
                type: 'number',
              },
-             CodigoNutricional: {
-               title: 'Código Nutricional',
-               type: 'number',
-             },
              TipoAlimentoId: {
                title: 'Tipo Alimento',
                valuePrepareFunction: (cell , row) => {

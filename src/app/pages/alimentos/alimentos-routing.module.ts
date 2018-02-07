@@ -9,6 +9,7 @@ import { ComponentesComponent } from './componentes/componentes.component';
 import { TiposAlimentosComponent } from './tipos_alimentos/tipos_alimentos.component';
 import { UnidadesMedidaComponent } from './unidades_medida/unidadesMedida.component';
 import { PlaneacionComponent } from './planeacion/planeacion.component';
+import { MinutaComponent } from './minuta/minuta.component';
 const routes: Routes = [{
   path: '',
   component: AlimentosComponent,
@@ -35,6 +36,10 @@ const routes: Routes = [{
   {
     path: 'tipos_alimentos',
     component: TiposAlimentosComponent,
+  },
+  {
+    path: 'minuta',
+    component: MinutaComponent,
   },
   {
     path: 'unidades_medida',

@@ -9,6 +9,7 @@ import { InstitucionService } from './institucion.service';
 import { PersonaService } from './persona.service';
 import { ProductoService } from './producto.service';
 import { ComponenteService } from './componente.service';
+import { ComponentesMenuService } from './componentesMenu.service';
 import { PlanService } from './plan.service';
 import { PreparacionService } from './preparacion.service';
 import { TipoAlimentoService } from './tipoAlimento.service';
@@ -25,6 +26,8 @@ import { RolService } from './rol.service';
 import { ComplementoService } from './complemento.service';
 import { DespachoService } from './despacho.service';
 import { WaybillService } from './waybill.service';
+import { ElementoService } from './elemento.service';
+
 
 const SERVICES = [
   UserService,
@@ -52,6 +55,8 @@ const SERVICES = [
   DespachoService,
   WaybillService,
   PlanService,
+  ComponentesMenuService,
+    ElementoService,
   ];
 
 @NgModule({
