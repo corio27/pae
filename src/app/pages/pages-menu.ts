@@ -35,10 +35,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/instituciones/crear',
       },
       {
-        title: 'Roles',
-        link: '/pages/instituciones/smart-table',
-      },
-      {
         title: 'Etc',
         link: '/pages/instituciones/etcs',
       },

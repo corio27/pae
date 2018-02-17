@@ -57,7 +57,7 @@ export class DevolucionesComponent  {
         editable: false,
       },
       Peso: {
-        title: 'Peso',
+        title: 'Peso (gr)',
         type: 'number',
         editable: false,
       },

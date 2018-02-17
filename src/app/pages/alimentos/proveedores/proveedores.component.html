@@ -48,7 +48,7 @@
         <div class="form-group">
           <label>Unidades Medida</label>
           <select [(ngModel)]="selectedUnidadMedida" class="form-control">
-            <option *ngFor="let u of unidadMedidas" [ngValue]="p">{{u.Nombre}}{{u.Peso}}</option>
+            <option *ngFor="let u of unidadMedidas" [ngValue]="u">{{u.Nombre}}X{{u.Peso}}</option>
           </select>
         </div>
         <div class="form-group">
@@ -57,6 +57,7 @@
         </div>
         <label>Fecha Aplicacion</label>
         <input #fecha class="form-control"/>
+
         <button (click)="addProducto(valor.value, fecha.value);" class="form-control">
           Añadir
         </button>
