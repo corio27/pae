@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { WaybillService } from '../../../@core/data/waybill.service';
 import { Waybill } from '../../../@core/data/waybill';
+import { Plan } from '../../../@core/data/plan';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'ngx-smart-table',
   templateUrl: './devoluciones.component.html',
@@ -12,7 +14,8 @@ import { Waybill } from '../../../@core/data/waybill';
   `],
 })
 export class DevolucionesComponent  {
-
+@Input() plan: Plan;
+uid: string;
   settings = {
     actions: {
       add: false,
@@ -95,9 +98,11 @@ export class DevolucionesComponent  {
   };
  source: LocalDataSource;
  waybill: Waybill;
-  constructor(private service: WaybillService) {
+  constructor(private service: WaybillService,   private route: ActivatedRoute) {
+    const id = this.route.snapshot.paramMap.get('id');
+    console.info(id);
     this.source = new LocalDataSource();
-    service.getWaybill().then((waybill) => {this.source.load(waybill); });
+    service.getWaybill(id.toString()).then((waybill) => {this.source.load(waybill); });
   }
   onDeleteConfirm(event): void {
     if (window.confirm('¿Seguro de querer eliminar?')) {

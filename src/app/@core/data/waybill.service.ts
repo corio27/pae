@@ -11,8 +11,9 @@ export class WaybillService {
   private waybillUrl = 'v1/waybill';
  constructor(private http: Http) { }
 
-getWaybill(): Promise<Waybill[]> {
-  return this.http.get('v1/waybill/?limit=-1')
+getWaybill(uid: string): Promise<Waybill[]> {
+  const url = `${this.waybillUrl}/?query=uid:${uid}&limit=-1`;
+  return this.http.get(url)
   .toPromise()
   .then(response  => response.json() as Waybill[])
   .catch(this.handleError);

@@ -43,7 +43,7 @@ const routes: Routes = [{
     component: BwayComponent,
   },
   {
-    path: 'devoluciones/:uid',
+    path: 'devoluciones/:id',
     component: DevolucionesComponent,
   },
   {
