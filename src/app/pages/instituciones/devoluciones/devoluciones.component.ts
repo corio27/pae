@@ -17,16 +17,6 @@ export class DevolucionesComponent  {
 @Input() plan: Plan;
 uid: string;
   settings = {
-    actions: {
-      add: false,
-      delete: false,
-    },
-  edit: {
-      confirmSave: true,
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    },
   columns: {
     Id: {
       title: 'id',
@@ -95,12 +85,22 @@ uid: string;
       },
 
     },
+    actions: {
+      position: 'right',
+      add: false,
+      delete: false,
+    },
+  edit: {
+      confirmSave: true,
+      editButtonContent: '<i class="nb-edit"></i>',
+      saveButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+    },
   };
  source: LocalDataSource;
  waybill: Waybill;
   constructor(private service: WaybillService,   private route: ActivatedRoute) {
     const id = this.route.snapshot.paramMap.get('id');
-    console.info(id);
     this.source = new LocalDataSource();
     service.getWaybill(id.toString()).then((waybill) => {this.source.load(waybill); });
   }
@@ -112,11 +112,11 @@ uid: string;
     }
   }
   onSaveConfirm(event) {
-    console.info(event);
-   if (window.confirm('¿Seguro de salvar?')) {
-      this.waybill = event.newData;
-      this.service.update(this.waybill);
-      console.info(this.waybill);
+    if (window.confirm('¿Seguro de salvar?')) {
+    this.waybill = event.newData;
+    this.waybill.EntregaReal = +event.newData.EntregaReal;
+    this.service.update(this.waybill);
+
        event.confirm.resolve(event.newData);
    } else {
      event.confirm.reject();

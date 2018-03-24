@@ -1,10 +1,9 @@
 <nb-card>
   <nb-card-header>
-    Gestionar Waybill
+  Gestionar Waybill {{route.snapshot.paramMap.get('id')}}
   </nb-card-header>
-
   <nb-card-body>
-    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"  (editConfirm)="onSaveConfirm($event)">
+    <ng2-smart-table  [source]="source" [settings]="settings" (deleteConfirm)="onDeleteConfirm($event)"  (editConfirm)="onSaveConfirm($event)">
     </ng2-smart-table>
   </nb-card-body>
 </nb-card>
