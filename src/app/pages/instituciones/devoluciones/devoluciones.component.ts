@@ -101,6 +101,7 @@ uid: string;
  waybill: Waybill;
   constructor(private service: WaybillService,   private route: ActivatedRoute) {
     const id = this.route.snapshot.paramMap.get('id');
+    this.uid = id;
     this.source = new LocalDataSource();
     service.getWaybill(id.toString()).then((waybill) => {this.source.load(waybill); });
   }
